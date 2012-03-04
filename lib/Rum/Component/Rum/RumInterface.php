@@ -16,4 +16,7 @@ interface RumInterface {
   public function getOs();
 
   public function getEnvironment();
+
+  public function getTime();
+
 }

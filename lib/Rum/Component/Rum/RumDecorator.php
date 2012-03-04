@@ -40,6 +40,10 @@ abstract class RumDecorator implements RumInterface {
     return $this->rum->getEnvironment();
   }
 
+  public function getTime() {
+    return $this->rum->getTime();
+  }
+
   public function checkSetting($setting) {
     return $this->rum->checkSetting($setting);
   }

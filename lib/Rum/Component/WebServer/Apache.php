@@ -19,12 +19,12 @@ class Apache extends WebServer {
     return array('rum_apache_hosts_dir', 'rum_apache_log_dir');
   }
 
-  public function createVhost($date, $port, $project_domain, $web_dir) {
+  public function createVhost($time, $port, $project_domain, $web_dir) {
     $vhost_file = $this->hosts_dir . '/' . $project_domain . '.conf';
     $vhost_log_dir = $this->log_dir . '/' . $project_domain;
 
     $contents = <<<CONFIG
-    # --------------- Added by tslag_add_subdomain - $date
+    # --------------- Added by Rum - $time
     <VirtualHost *:$port>
       ServerName $project_domain
       DocumentRoot $web_dir

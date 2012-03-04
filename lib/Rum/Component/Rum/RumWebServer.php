@@ -14,17 +14,19 @@ class RumWebServer extends RumDecorator {
   function __construct($rum) {
     parent::__construct($rum);
     $this->web_server = WebServer::getInstance('Apache');
-    $settings = $this->web_server->getSettings();
+    $settings = array('rum_http_port');
+    $settings += $this->web_server->getSettings();
     foreach ($settings as $setting) {
       $this->checkSetting($setting);
     }
   }
 
   public function createVhost() {
-    $port = '80';
+    $port = $this->port;
     $project_domain = $this->getProjectDomain();
     $web_dir = $this->getProjectDir() . '/www';
-    $this->web_server->createVhost($date, $port, $project_domain, $web_dir);
+    $time = $this->getTime();
+    $this->web_server->createVhost($time, $port, $project_domain, $web_dir);
   }
 
   public function removeVhost() {
