@@ -22,8 +22,6 @@ class Rum implements RumInterface {
   
   private $settings_map;
 
-  private $date;
-
   public function __construct($project_name, $project_dir) {
     drush_log(dt('Initializing Rum ...'), 'status');
     $this->settings_map = array(
@@ -32,16 +30,9 @@ class Rum implements RumInterface {
     foreach ($this->settings_map as $setting) {
       $this->checkSetting($setting);
     }
-    // Set the current time once.
-    date_default_timezone_set(drush_get_option('rum_timezone', 'Europe/Brussels'));
-    $this->date = date("Y-m-d_H-i-s", $_SERVER['REQUEST_TIME']);
-    // Set the workspace
     $this->workspace = drush_get_option('rum_workspace', 'workspace');
-    // Set the hostname of your machine (i.e. netsensei, stalski, swentel, atlas,...)
     $this->host_name = drush_get_option('rum_host', 'rum');
-    // Set the type of OS you're using. Rum is not OS aware.
     $this->os = drush_get_option('rum_os', 'osx');
-    // Set the environment
     $this->environment = 'DEV'; // @todo configure this
     if (empty($project_name)) {
       // @todo bailout
@@ -50,9 +41,7 @@ class Rum implements RumInterface {
     if (empty($project_dir)) {
       // @todo bailout
     }
-    // Set the project_dir for the action on this particular project
     $this->project_dir = $this->workspace . '/' . $project_dir;
-    // Generate a domain name. Will be hostname.project_name (i.e. netsensei.foobar)
     $this->project_domain = $this->host_name . '.' . $project_name;
   }
 
@@ -86,10 +75,6 @@ class Rum implements RumInterface {
 
   public function setEnviroment($environment) {
     return $this->enviroment = $environment;
-  }
-
-  public function getDate() {
-    return $this->date;
   }
 
   public function tearDown() {

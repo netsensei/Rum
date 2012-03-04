@@ -60,7 +60,6 @@ class FileSystem {
         drush_delete_dir($file);
       }
       else {
-        drush_op('unlink', $file);
         unlink($file);
       }
     }
