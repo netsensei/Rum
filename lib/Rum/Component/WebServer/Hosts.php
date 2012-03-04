@@ -3,35 +3,25 @@
 namespace Rum\Component\WebServer;
 
 use Rum\Component\FileSystem\FileSystem;
+use Rum\Component\WebServer\Exception\RumHostsFileDoesNotExist;
 
 class Hosts {
 
-  private static $instance;
-
-  private $hosts_file;
-
-  private $file_system;
-
-  private function __construct() {
-    $this->file_system = new FileSystem();
-    $hosts_file = drush_get_option('rum_hosts_file', '');
-    if ($this->file_system->checkFile($hosts_file)) {
-      $this->hosts_file = $hosts_file; 
-    } else {
-      throw new RumHostsFileDoesNotExist($hosts_file);
-    }
-  }
-
+  protected static $instance = NULL;
+  
   public function getInstance() {
     if (!self::$instance) {
-      self::$instance =  new Hosts();
+      $class_name = __CLASS__;
+      self::$instance = new $class_name;
     }
 
     return self::$instance;
   }
 
   public function addHostsEntry($project_domain) {
-    $hosts_lines = explode("\n", file_get_contents($this->hosts_file));
+    $hosts_file = drush_get_option('rum_hosts_file', '');
+    drush_log(dt('Adding host entry to %file', array('%file' => $hosts_file)), 'status');
+    $hosts_lines = explode("\n", file_get_contents($hosts_file));
     $host_available = FALSE;
     foreach ($hosts_lines as $line) {
       if (preg_match("/" . $project_domain . "/", $line)) {
