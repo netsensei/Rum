@@ -3,6 +3,7 @@
 namespace Rum\Component\Rum;
 
 interface RumInterface {
+
   public function getWorkspace();
   
   public function getProjectDomain();
@@ -16,4 +17,7 @@ interface RumInterface {
   public function getOs();
 
   public function getEnvironment();
+
+  public function getTime();
+
 }

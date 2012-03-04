@@ -4,6 +4,7 @@ use Rum\Component\Rum\Rum;
 use Rum\Component\Rum\RumFileSystem;
 use Rum\Component\Rum\RumVanilla;
 use Rum\Component\Rum\RumWebServer;
+use Rum\Component\Rum\RumHosts;
 
 function drush_rum_create($type, $project_name = NULL) {
   
@@ -36,6 +37,10 @@ function drush_rum_create($type, $project_name = NULL) {
     // Create a new virtual host
     $rum = new RumWebServer($rum);
     $rum->createVhost();
+
+    // Add a new entry in the hosts file (if we're run in DEV)
+    $rum = new RumHosts($rum);
+    $rum->addHostsEntry();
 
     // Tear down Rum
     // $rum->tearDown();
