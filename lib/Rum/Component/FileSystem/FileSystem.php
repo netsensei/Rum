@@ -33,7 +33,7 @@ class FileSystem {
   }
   
   public function checkFile($file) {
-    if (is_file($file)) {
+    if (file_exists($file)) {
       return TRUE;
     }
 
@@ -45,6 +45,7 @@ class FileSystem {
 
     if ($tmp_file) {
       if (copy($tmp_file, $file)) {
+        drush_log(dt('Created %file', array('%file' => $file)), 'success');
         return TRUE;
       } else {
         // @throw copy failed
