@@ -21,6 +21,7 @@ class Apache extends WebServer {
 
   public function createVhost($date, $port, $project_domain, $web_dir) {
     $vhost_file = $this->hosts_dir . '/' . $project_domain . '.conf';
+    $vhost_log_dir = $this->log_dir . '/' . $project_domain;
 
     $contents = <<<CONFIG
     # --------------- Added by tslag_add_subdomain - $date
@@ -28,8 +29,8 @@ class Apache extends WebServer {
       ServerName $project_domain
       DocumentRoot $web_dir
       LogLevel info
-      ErrorLog $log_dir/$project_domain/$project_domain.error.log
-      CustomLog $log_dir/$project_domain/$project_domain.access.log combined
+      ErrorLog $vhost_log_dir/$project_domain.error.log
+      CustomLog $vhost_log_dir/$project_domain.access.log combined
 
       <Directory $web_dir>
         Options Indexes FollowSymlinks MultiViews
@@ -41,6 +42,7 @@ class Apache extends WebServer {
 CONFIG;
 
     $this->file_system->createFile($vhost_file, $contents);
+    $this->file_system->createDir($vhost_log_dir);
   }
 
   public function removeVhost($project_domain) { 
