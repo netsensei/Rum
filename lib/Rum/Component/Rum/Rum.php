@@ -30,9 +30,13 @@ class Rum implements RumInterface {
     foreach ($this->settings_map as $setting) {
       $this->checkSetting($setting);
     }
+    // Set the workspace
     $this->workspace = drush_get_option('rum_workspace', 'workspace');
+    // Set the hostname of your machine (i.e. netsensei, stalski, swentel, atlas,...)
     $this->host_name = drush_get_option('rum_host', 'rum');
+    // Set the type of OS you're using. Rum is not OS aware.
     $this->os = drush_get_option('rum_os', 'osx');
+    // Set the environment
     $this->environment = 'DEV'; // @todo configure this
     if (empty($project_name)) {
       // @todo bailout
@@ -41,7 +45,9 @@ class Rum implements RumInterface {
     if (empty($project_dir)) {
       // @todo bailout
     }
+    // Set the project_dir for the action on this particular project
     $this->project_dir = $this->workspace . '/' . $project_dir;
+    // Generate a domain name. Will be hostname.project_name (i.e. netsensei.foobar)
     $this->project_domain = $this->host_name . '.' . $project_name;
   }
 
