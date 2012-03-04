@@ -2,8 +2,8 @@
 
 namespace Rum\Component\FileSystem;
 
-use Rum\Component\FileSystem\FileSystemDirectoryCreateException;
-use Rum\Component\FileSystem\FileSystemDirectoryWritableException;
+use Rum\Component\FileSystem\Exception\FileSystemDirectoryCreateException;
+use Rum\Component\FileSystem\Exception\FileSystemDirectoryWritableException;
 
 class FileSystem {
 
