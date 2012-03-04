@@ -41,8 +41,13 @@ class Apache extends WebServer {
     </VirtualHost>
 CONFIG;
 
-    $this->file_system->createFile($vhost_file, $contents);
-    $this->file_system->createDir($vhost_log_dir);
+    if (!$this->file_system->checkFile($vhost_file)) {
+      $this->file_system->createFile($vhost_file, $contents);
+    }
+
+    if (!$this->file_system->checkDir($vhost_log_dir)) {
+      $this->file_system->createDir($vhost_log_dir);
+    }
   }
 
   public function removeVhost($project_domain) { 
