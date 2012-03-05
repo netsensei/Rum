@@ -34,13 +34,14 @@ function drush_rum_create($type, $project_name = NULL) {
     //$version = drush_choice(array('6', '7'), $msg);
     //$rum->downloadCore($version);
 
+    // Add a new entry in the hosts file (if we're run in DEV)
+    $rum = new RumHosts($rum);
+    $rum->addHostsEntry();
+
     // Create a new virtual host
     $rum = new RumWebServer($rum);
     $rum->createVhost();
 
-    // Add a new entry in the hosts file (if we're run in DEV)
-    $rum = new RumHosts($rum);
-    $rum->addHostsEntry();
     // Restart webserver
     $rum->restart();
 
