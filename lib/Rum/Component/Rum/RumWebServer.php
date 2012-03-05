@@ -31,4 +31,9 @@ class RumWebServer extends RumDecorator {
 
   public function removeVhost() {
   }
+
+  public function restart() {
+    $os = $this->getOs();
+    $this->web_server->restart($os);
+  }
 }

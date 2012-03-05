@@ -9,6 +9,12 @@ class Apache extends WebServer {
 
   private $protection = '';
 
+  const RUM_APACHE_UBUNTU = 'ubuntu';
+
+  const RUM_APACHE_OSX = 'osx';
+
+  const RUM_APACHE_FEDORA = 'fedora';
+
   public function __construct() {
     $this->hosts_dir = drush_get_option('rum_apache_hosts_dir', '');
     $this->log_dir = drush_get_option('rum_apache_log_dir', '');
@@ -58,8 +64,21 @@ CONFIG;
     $this->file_system->removeFile($log_dir);
   }
 
-  public function restart() { }
-
+  public function restart($os) {
+    switch ($os) {
+      case Apache::RUM_APACHE_UBUNTU :
+        drush_shell_exec("sudo /etc/init.d/apache2 reload");
+        break;
+      case Apache::RUM_APACHE_OSX :
+	      drush_shell_exec("/Applications/MAMP/bin/apache2/bin/apachectl restart");
+        break;
+      case Apache::RUM_APACHE_FEDORA :
+        drush_shell_exec("sudo /etc/init.d/httpd reload");
+        break;
+      default:
+    }
+  }
+  
   public function setProtection() {
     $protect = drush_confirm("Do you want to protect this website via .htaccess ? This will create a htpasswd file in /etc/htpasswd.");
     if ($protect) {  

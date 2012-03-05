@@ -41,6 +41,8 @@ function drush_rum_create($type, $project_name = NULL) {
     // Add a new entry in the hosts file (if we're run in DEV)
     $rum = new RumHosts($rum);
     $rum->addHostsEntry();
+    // Restart webserver
+    $rum->restart();
 
     // Tear down Rum
     // $rum->tearDown();
