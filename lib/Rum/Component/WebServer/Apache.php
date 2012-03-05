@@ -76,6 +76,7 @@ CONFIG;
         drush_shell_exec("sudo /etc/init.d/httpd reload");
         break;
       default:
+        throw new RumApacheNoCommandNotFound();
     }
   }
   
