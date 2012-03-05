@@ -28,7 +28,6 @@ class RumWebServer extends RumDecorator {
       default :
         throw new RumWebServerClassNotFound($class_name);
     }
-    $this->web_server = WebServer::getInstance('Apache');
     $settings = array('rum_http_port');
     $settings += $this->web_server->getSettings();
     foreach ($settings as $setting) {
