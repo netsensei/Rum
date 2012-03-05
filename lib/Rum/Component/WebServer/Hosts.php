@@ -28,13 +28,16 @@ class Hosts {
         $host_available = TRUE;
       }
     }
+
     if (!$host_available) {
       $hosts_lines[] = "127.0.0.1\t" . $project_domain;
+      // Use exec because the lines might contain % which we really do not need here.
+      exec("sudo sh -c 'echo \"" . implode("\n", $hosts_lines) . "\" > /etc/hosts'");
+      drush_log('Entry "'. $project_domain .'" added to hosts file', 'success');
+      drush_log(dt('Entry %project_domain added to hosts file', array('%project_domain' => $project_domain)), 'success');
+    } else {
+      drush_log(dt('Entry %project_domain already in hosts file', array('%project_domain' => $project_domain)), 'warning');
     }
-
-    // Use exec because the lines might contain % which we really do not need here.
-    exec("sudo sh -c 'echo \"" . implode("\n", $hosts_lines) . "\" > /etc/hosts'");
-    drush_log('Entry "'. $project_domain .'" added to hosts file', 'success');
   }
 
   public function getSettings() {
