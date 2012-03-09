@@ -45,6 +45,10 @@ function drush_rum_create($type, $project_name = NULL) {
     // Restart webserver
     $rum->restart();
 
+    // Create a new database user
+    $rum = new RumDatabase($rum);
+    $rum->createUser();
+
     // Tear down Rum
     // $rum->tearDown();
   } catch(Exception $e) {
