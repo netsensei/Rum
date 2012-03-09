@@ -1,6 +1,7 @@
 <?php
 
 use Rum\Component\Rum\Rum;
+use Rum\Component\Rum\RumDatabase;
 use Rum\Component\Rum\RumFileSystem;
 use Rum\Component\Rum\RumVanilla;
 use Rum\Component\Rum\RumWebServer;
