@@ -4,6 +4,7 @@ namespace Rum\Component\Rum;
 
 use Rum\Component\Rum\RumDecorator;
 use Rum\Component\WebServer\WebServer;
+use Rum\Component\FileSystem\FileSystem;
 use Rum\Component\WebServer\Exception\RumWebServerClassNotFound;
 
 class RumWebServer extends RumDecorator {
@@ -20,6 +21,7 @@ class RumWebServer extends RumDecorator {
     parent::__construct($rum);
     $this->checkSetting('rum_http_type');
     $class_name = drush_get_option('rum_http_type', '');
+    $this->file_system = new FileSystem();
     switch ($class_name) {
       case self::RUM_HTTP_APACHE :
       case self::RUM_HTTP_NGINX :
@@ -28,7 +30,7 @@ class RumWebServer extends RumDecorator {
       default :
         throw new RumWebServerClassNotFound($class_name);
     }
-    $settings = array('rum_http_port');
+    $settings = array('rum_http_port', 'rum_http_doc_root');
     $settings += $this->web_server->getSettings();
     foreach ($settings as $setting) {
       $this->checkSetting($setting);
@@ -39,11 +41,16 @@ class RumWebServer extends RumDecorator {
     $port = drush_get_option('rum_http_port', '');
     $project_domain = $this->getProjectDomain();
     $web_dir = $this->getProjectDir() . '/www';
+    $link = drush_get_option('rum_http_doc_root', '') . '/' . $this->getProjectName();
     $time = $this->getTime();
-    $this->web_server->createVhost($time, $port, $project_domain, $web_dir);
+    if (!$this->file_system->checkFile($link)) {
+      $this->file_system->createLink($web_dir, $link);
+    }
+    $this->web_server->createVhost($time, $port, $project_domain, $link);
   }
 
   public function removeVhost() {
+    // @todo
   }
 
   public function restart() {
