@@ -31,9 +31,10 @@ function drush_rum_create($type, $project_name = NULL) {
 
     // Download Drupal core
     $rum = new RumVanilla($rum);
-    //$msg = dt('What Core version do you want to download?');
-    //$version = drush_choice(array('6', '7'), $msg);
-    //$rum->downloadCore($version);
+    $msg = dt('What Core version do you want to download?');
+    $version = drush_choice(array('Version 6', 'Version 7'), $msg);
+    $rum->setCoreVersion($version);
+    $rum->downloadCore();
 
     // Add a new entry in the hosts file (if we're run in DEV)
     $rum = new RumHosts($rum);

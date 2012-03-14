@@ -12,12 +12,23 @@ class RumVanilla extends RumDecorator {
     parent::__construct($rum);
   }
 
-  public function downloadCore($version) {
-    $www_dir = $this->project_dir . '/www';
-    drush_set_option('destination', $this->project_dir);
-    drush_set_option('drupal-project-rename', basename(www_dir));
-    drush_pm_download('drupal-' . $version);
-    if (drush_get_error()) return FALSE; // Early exit if we see an error.;
+  public function downloadCore() {
+    $core_version = $this->getCoreVersion();
+
+    if (!isset($core_version)) {
+      throw new RumCoreVersionNotDetermined();
+    }
+
+    $www_dir = $this->getProjectDir() . '/www';
+
+    if (!is_file($www_dir . '/misc/drupal.js')) {
+      drush_set_option('destination', $this->getProjectDir());
+      drush_set_option('drupal-project-rename', basename($www_dir));
+      drush_pm_download('drupal-' . $core_version);
+      if (drush_get_error()) return FALSE; // Early exit if we see an error.;
+    } else {
+      drush_log(dt('Drupal already downloaded and unpacked for this project.'));
+    }
   }
 
 }
