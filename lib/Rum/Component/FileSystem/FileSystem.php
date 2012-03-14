@@ -51,7 +51,7 @@ class FileSystem {
     $tmp_file = drush_save_data_to_temp_file($contents);
 
     if ($tmp_file) {
-      if (copy($tmp_file, $file)) {
+      if (drush_op('copy', $tmp_file, $file)) {
         drush_log(dt('Created %file', array('%file' => $file)), 'success');
         return TRUE;
       } else {
