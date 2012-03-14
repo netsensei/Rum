@@ -4,6 +4,10 @@ namespace Rum\Component\Rum;
 
 use Rum\Component\Rum\Exception\RumSettingDoesNotExist;
 
+define('RUM_CORE_VERSION_6', 6);
+
+define('RUM_CORE_VERSION_7', 7);
+
 class Rum implements RumInterface {
 
   private $workspace;
@@ -23,6 +27,8 @@ class Rum implements RumInterface {
   private $settings_map;
 
   private $date;
+
+  private $core_version = NULL;
 
   public function __construct($project_name, $project_dir) {
     drush_log(dt('Initializing Rum ...'), 'status');
@@ -111,5 +117,20 @@ class Rum implements RumInterface {
     }
 
     return TRUE;
+  }
+  
+  public function setCoreVersion($version) {
+    switch ($version) {
+      case 0 : 
+        $this->core_version = RUM_CORE_VERSION_6;
+        break;
+      case 1 :
+        $this->core_version = RUM_CORE_VERSION_7;
+        break; 
+    }
+  }
+
+  public function getCoreVersion() {
+    return $this->core_version;
   }
 }

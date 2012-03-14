@@ -18,5 +18,8 @@ interface RumInterface {
   public function getEnvironment();
 
   public function getTime();
+  
+  public function getCoreVersion();
 
+  public function setCoreVersion($version);
 }

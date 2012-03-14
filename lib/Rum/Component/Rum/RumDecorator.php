@@ -43,6 +43,14 @@ abstract class RumDecorator implements RumInterface {
   public function getTime() {
     return $this->rum->getTime();
   }
+  
+  public function getCoreVersion() {
+    return $this->rum->getCoreVersion();
+  }
+
+  public function setCoreVersion($version) {
+    $this->rum->setCoreVersion($version);
+  }
 
   public function checkSetting($setting) {
     return $this->rum->checkSetting($setting);
