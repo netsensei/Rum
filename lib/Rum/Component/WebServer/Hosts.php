@@ -8,7 +8,7 @@ use Rum\Component\WebServer\Exception\RumHostsFileDoesNotExist;
 class Hosts {
 
   protected static $instance = NULL;
-  
+
   public function getInstance() {
     if (!self::$instance) {
       $class_name = __CLASS__;

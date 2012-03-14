@@ -77,7 +77,7 @@ class Rum implements RumInterface {
   public function getProjectName() {
     return $this->project_name;
   }
-  
+
   public function getHostName() {
     return $this->host_name;
   }

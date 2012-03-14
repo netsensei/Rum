@@ -20,7 +20,7 @@ class FileSystem {
 
     return $return;
   }
-  
+
   public function createDir($directory) {
     $return = drush_op('mkdir', $directory);
     if ($return) {
