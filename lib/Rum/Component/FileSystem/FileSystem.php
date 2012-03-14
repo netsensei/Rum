@@ -31,7 +31,14 @@ class FileSystem {
 
     return $return; 
   }
-  
+
+  public function createLink($source, $target) {
+    $result = drush_shell_exec("sudo ln -s $source $target");
+    if (!$result) {
+      throw new FileSystemCouldNotCreateLink($source, $target);
+    }
+  }
+
   public function checkFile($file) {
     if (file_exists($file)) {
       return TRUE;
