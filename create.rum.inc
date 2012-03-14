@@ -50,6 +50,7 @@ function drush_rum_create($type, $project_name = NULL) {
     // Create a new database user
     $rum = new RumDatabase($rum);
     $rum->createUser();
+    $rum->createSettingsFile();
 
     // Tear down Rum
     // $rum->tearDown();
