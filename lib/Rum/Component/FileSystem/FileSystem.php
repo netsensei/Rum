@@ -63,14 +63,8 @@ class FileSystem {
   }
 
   public function removeFile($file) {
-    if (file_exists($file)) {
-      if (is_dir($file)) {
-        drush_delete_dir($file);
-      }
-      else {
-        drush_op('unlink', $file);
-        unlink($file);
-      }
+    if (drush_delete_dir($file)) {
+      drush_log(dt('Removed %file', array('%file' => $file)), 'success');
     }
   }
 }
