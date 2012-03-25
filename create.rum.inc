@@ -5,6 +5,7 @@ use Rum\Component\Rum\RumDatabase;
 use Rum\Component\Rum\RumFileSystem;
 use Rum\Component\Rum\RumVanilla;
 use Rum\Component\Rum\RumWebServer;
+use Rum\Component\Rum\RumDrush;
 use Rum\Component\Rum\RumHosts;
 
 function drush_rum_create($type, $project_name = NULL) {
@@ -52,8 +53,9 @@ function drush_rum_create($type, $project_name = NULL) {
     $rum->createUser();
     $rum->createSettingsFile();
 
-    // Tear down Rum
-    // $rum->tearDown();
+    // Create a new drushrc file
+    $rum = new RumDrush($rum);
+    $rum->createDrush();
   } catch(Exception $e) {
     drush_set_error($e->getMessage());
   }
