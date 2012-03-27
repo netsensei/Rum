@@ -21,9 +21,9 @@ class RumDrush extends RumDecorator {
   public function createDrush() {
     $environment = $this->getEnvironment();
     $domain_name = $this->getProjectDomain();
-    $www_dir = $this->getProjectDir() . '/www';
+    $project_dir = $this->getProjectDir();
     $project_name = $this->getProjectName();
-    $this->drush->createDrush($environment, $project_name, $domain_name, $www_dir);
+    $this->drush->createDrush($environment, $project_name, $domain_name, $project_dir);
   }
 
   public function removeDrush() {
