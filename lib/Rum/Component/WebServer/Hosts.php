@@ -40,6 +40,26 @@ class Hosts {
     }
   }
 
+  public function removeHostsEntry($project_domain) {
+    $hosts_file = drush_get_option('rum_hosts_file', '');
+    drush_log(dt('Removing host entry from !file', array('!file' => $hosts_file)), 'status');
+    $hosts_lines = explode("\n", file_get_contents($hosts_file));
+    $host_available = FALSE;
+    foreach ($hosts_lines as $delta => $host) {
+      if (preg_match("/" . $project_domain . "/", $host)) {
+        unset($hosts_lines[$delta]);
+        $host_available = TRUE;
+      }
+    }
+
+    if ($host_available) {
+      exec("sudo sh -c 'echo \"" . implode("\n", $hosts_lines) . "\" > /etc/hosts'");
+      drush_log(dt('Entry %project_domain removed from hosts file', array('%project_domain' => $project_domain)), 'success');
+    } else {
+      drush_log(dt('Entry %project_domain was not found in hosts file', array('%project_domain' => $project_domain)), 'warning');
+    }
+  }
+
   public function getSettings() {
     return array('rum_hosts_file');
   }

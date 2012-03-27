@@ -34,7 +34,9 @@ function drush_rum_delete($project = NULL) {
     }
 
     // @todo delete the hosts reference
-    
+    $rum = new RumHosts($rum);
+    $rum->removeHostsEntry();
+
     // @todo delete the vhost configuration
     // @todo delete the link
 

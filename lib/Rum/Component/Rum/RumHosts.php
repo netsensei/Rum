@@ -26,6 +26,9 @@ class RumHosts extends RumDecorator {
   }
 
   public function removeHostsEntry() {
+    if ($this->getEnvironment() == 'DEV') {
+      $this->hosts->removeHostsEntry($this->getProjectDomain());
+    }
   }
 
   public function checkSetting($setting) {
