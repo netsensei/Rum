@@ -75,6 +75,8 @@ class RumDatabase extends RumDecorator {
     $contents .= 'require "settings.custom.php";';
     $this->file_system->createFile($settings_file, $contents);
 
+    // @todo MySQL specific logic here. We need to abstract and hide this from
+    // this class.
     $core_version = $this->getCoreVersion();
     switch ($core_version) {
       case RUM_CORE_VERSION_6 :
@@ -122,14 +124,15 @@ SETTINGS;
     return $output;
   }
 
-  public function setProjectDbUser($db_user) {
+  public function setProjectDbUser($db_user, $db_cred) {
     $this->db_user = $db_user;
-  }
-  
-  public function setProjectDbCred($db_cred) {
     $this->db_cred = $db_cred;
   }
-  
+
+  public function setProjectDb($database) {
+    $this->database = $database;
+  }
+
   public function createUser() {
     $this->db_user = substr($this->getEnvironment() . '_' . strtoupper($this->getProjectName()), 0, 16);
     $this->db_cred = md5(strrev($db_user));
@@ -137,14 +140,15 @@ SETTINGS;
   }
 
   public function createDatabase() {
-    
+    $this->db_server->createDatabase($this->database);
   }
-  
-  public function dropUser() {
-    
-  }
-  
-  public function dropDatabase() {
 
+  public function dropUser() {
+    $this->db_server->dropUser($this->db_user);
   }
+
+  public function dropDatabase() {
+    $this->db_server->dropDatabase($this->database);
+  }
+
 }

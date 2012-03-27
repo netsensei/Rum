@@ -24,6 +24,19 @@ function rum_drush_command() {
     'aliases' => array('rc'),
   );
   
+
+  $items['rum-delete'] = array(
+    'description' => 'Delete a local project',
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_DATABASE,
+    'examples' => array(
+      'drush rum-delete foobar' => 'Delete a project named foobar',
+    ),
+    'arguments' => array(
+      'project' => 'The project name',
+    ),
+    'aliases' => array('rd'),
+  );
+
   return $items;
 
 }
