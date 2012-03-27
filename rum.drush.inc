@@ -15,15 +15,14 @@ function rum_drush_command() {
     'description' => 'Creates a local Drupal site',
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
     'examples' => array(
-      'drush rum-create-vanilla' => 'Create an empty website with a clean Drupal core setup',
+      'drush rum-create vanilla' => 'Create an empty website with a clean Drupal core setup',
     ),
     'arguments' => array(
       'type' => 'The type of installation',
-      'project' => 'The site name',
+      'project' => 'The project name',
     ),
     'aliases' => array('rc'),
   );
-  
 
   $items['rum-delete'] = array(
     'description' => 'Delete a local project',
