@@ -31,6 +31,11 @@ class RumFileSystem extends RumDecorator {
     $this->project_dir = $project_dir;
   }
 
+  public function removeProjectDir() {
+    $project_dir = $this->getProjectDir();
+    $this->removeDirectory($project_dir);
+  }
+
   private function createDirectory($directory) {
     $result = $this->file_system->checkDir($directory);
 
@@ -41,7 +46,23 @@ class RumFileSystem extends RumDecorator {
       } else {
         $result = drush_user_abort('Aborting...');
       }
-    }    
+    }
+
+    return $result;
+  }
+
+  private function removeDirectory($directory) {
+    $result = $this->file_system->checkDir($directory);
+    if ($result) {
+      $remove = drush_confirm(dt('Do you want to delete directory %directory?', array('%directory' => $directory)));
+      if ($remove) {
+        $result = $this->file_system->removeDir($directory);
+      } else {
+        $result = drush_user_abort('Aborting...');
+      }
+    }
+
+    return $result;
   }
 
 }

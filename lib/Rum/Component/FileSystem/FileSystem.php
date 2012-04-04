@@ -32,6 +32,15 @@ class FileSystem {
     return $return; 
   }
 
+  public function removeDir($directory) {
+    $return = drush_delete_dir($directory);
+    if ($return) {
+      drush_log(dt('Deleted %directory'), array('%directory' => $directory), 'success');
+    } else {
+      throw new FileSystemDirectoryRemoveException($directory);
+    }
+  }
+
   public function createLink($source, $target) {
     $result = drush_shell_exec("sudo ln -s $source $target");
     if (!$result) {

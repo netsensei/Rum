@@ -8,6 +8,7 @@
 use Rum\Component\Rum\Rum;
 use Rum\Component\Rum\RumDatabase;
 use Rum\Component\Rum\RumHosts;
+use Rum\Component\Rum\RumFileSystem;
 use Rum\Component\Rum\RumDrush;
 
 function drush_rum_delete($project = NULL) {
@@ -39,8 +40,9 @@ function drush_rum_delete($project = NULL) {
     $rum = new RumHosts($rum);
     $rum->removeHostsEntry();
 
-    // @todo delete the vhost configuration
-    // @todo delete the link
+    // Delete the entire project folder
+    $rum = new RumFileSystem($rum);
+    $rum->RemoveProjectDir();
 
     // @todo delete the www folder
 
