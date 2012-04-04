@@ -33,10 +33,10 @@ function drush_rum_delete($project = NULL) {
     $result = drush_confirm(dt('Do you really want to drop the database?'));
     if ($result) {
       $rum->dropUser();
-      $rum->dropDatabase(); // does not compute...?
+      $rum->dropDatabase();
     }
 
-    // @todo delete the hosts reference
+    // Delete the hosts reference
     $rum = new RumHosts($rum);
     $rum->removeHostsEntry();
 
