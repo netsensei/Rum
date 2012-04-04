@@ -8,6 +8,7 @@
 use Rum\Component\Rum\Rum;
 use Rum\Component\Rum\RumDatabase;
 use Rum\Component\Rum\RumHosts;
+use Rum\Component\Rum\RumWebServer;
 use Rum\Component\Rum\RumFileSystem;
 use Rum\Component\Rum\RumDrush;
 
@@ -46,6 +47,8 @@ function drush_rum_delete($project = NULL) {
     $rum->removeVhost();
 
     // @todo delete the db folder
+    // Restart webserver
+    $rum->restart();
 
     // @todo delete the drushrc file
     // Delete the entire project folder
