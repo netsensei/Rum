@@ -8,6 +8,7 @@
 use Rum\Component\Rum\Rum;
 use Rum\Component\Rum\RumDatabase;
 use Rum\Component\Rum\RumHosts;
+use Rum\Component\Rum\RumDrush;
 
 function drush_rum_delete($project = NULL) {
   
@@ -48,6 +49,8 @@ function drush_rum_delete($project = NULL) {
     // @todo delete the project folder
     
     // @todo delete the drushrc file
+    $rum = new RumDrush($rum);
+    $rum->removeDrush();
 
   } catch (Exception $e) {
     drush_set_error($e->getMessage());

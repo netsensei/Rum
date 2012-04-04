@@ -39,4 +39,12 @@ DRUSH;
       $this->file_system->createFile($file, $contents);
     }
   }
+
+  public function removeDrush($project_name) {
+    $drush_dir = drush_get_option('rum_drush_dir', '');
+    $file = $drush_dir . '/'. $project_name . '.aliases.drushrc.php';
+    if ($this->file_system->checkFile($file)) {
+      $this->file_system->removeFile($file);
+    }
+  }
 }
