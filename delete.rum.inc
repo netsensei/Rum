@@ -40,10 +40,6 @@ function drush_rum_delete($project = NULL) {
     $rum = new RumHosts($rum);
     $rum->removeHostsEntry();
 
-    // Delete the entire project folder
-    $rum = new RumFileSystem($rum);
-    $rum->RemoveProjectDir();
-
     // Delete the vhost configuration
     // Delete the link
     $rum = new RumWebServer($rum);
@@ -51,9 +47,11 @@ function drush_rum_delete($project = NULL) {
 
     // @todo delete the db folder
 
-    // @todo delete the project folder
-    
     // @todo delete the drushrc file
+    // Delete the entire project folder
+    $rum = new RumFileSystem($rum);
+    $rum->RemoveProjectDir();
+
     $rum = new RumDrush($rum);
     $rum->removeDrush();
 

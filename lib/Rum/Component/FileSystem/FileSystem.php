@@ -72,8 +72,20 @@ class FileSystem {
   }
 
   public function removeFile($file) {
-    if (drush_delete_dir($file)) {
+    $success = FALSE;
+
+    if (is_link($file)) {
+      $success = unlink($file);
+    } else if (is_dir($file)) {
+      $succes = drush_delete_dir($file);
+    } else if (is_file($file)) {
+      $success = unlink($file);
+    }
+
+    if ($success) {
       drush_log(dt('Removed %file', array('%file' => $file)), 'success');
+    } else {
+      // @throw file could not be removed
     }
   }
 }
