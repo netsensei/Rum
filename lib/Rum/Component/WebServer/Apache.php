@@ -57,7 +57,6 @@ CONFIG;
   }
 
   public function removeVhost($project_domain) { 
-    
     $vhost_file = $this->hosts_dir . '/' . $project_domain . '.conf';
     $this->file_system->removeFile($vhost_file);
     $log_dir = $this->log_dir . '/' . $project_domain;

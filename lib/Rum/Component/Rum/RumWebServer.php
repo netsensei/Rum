@@ -50,7 +50,12 @@ class RumWebServer extends RumDecorator {
   }
 
   public function removeVhost() {
-    // @todo
+    $link = drush_get_option('rum_http_doc_root', '') . '/' . $this->getProjectName();
+    if ($this->file_system->checkFile($link)) {
+      $this->file_system->removeFile($link);
+    }
+    $project_domain = $this->getProjectDomain();
+    $this->web_server->removeVhost($project_domain);
   }
 
   public function restart() {
