@@ -72,7 +72,7 @@ class MySQL extends Database {
    *   A string with the mysql base command
    */
   private function baseCommand() {
-    return "mysql -u" . $this->db_root_user ." -p" . $this->db_root_pass . " -Bse \"";
+    return "mysql -u " . $this->db_root_user ." -p " . $this->db_root_pass . " -Bse \"";
   }
 
 }
