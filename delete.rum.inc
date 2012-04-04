@@ -46,15 +46,14 @@ function drush_rum_delete($project = NULL) {
     $rum = new RumWebServer($rum);
     $rum->removeVhost();
 
-    // @todo delete the db folder
     // Restart webserver
     $rum->restart();
 
-    // @todo delete the drushrc file
     // Delete the entire project folder
     $rum = new RumFileSystem($rum);
     $rum->RemoveProjectDir();
 
+    // Delete the drushrc file
     $rum = new RumDrush($rum);
     $rum->removeDrush();
 
