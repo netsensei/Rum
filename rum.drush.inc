@@ -8,7 +8,7 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
  * Implements hook_drush_command().
  */
 function rum_drush_command() {
-  
+
   rum_class_loader();
 
   $items['rum-create'] = array(

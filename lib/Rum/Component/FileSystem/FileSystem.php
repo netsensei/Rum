@@ -29,7 +29,7 @@ class FileSystem {
       throw new FileSystemDirectoryCreateException($directory);
     }
 
-    return $return; 
+    return $return;
   }
 
   public function removeDir($directory) {
@@ -55,7 +55,7 @@ class FileSystem {
 
     return FALSE;
   }
- 
+
   public function createFile($file, $contents) {
     $tmp_file = drush_save_data_to_temp_file($contents);
 

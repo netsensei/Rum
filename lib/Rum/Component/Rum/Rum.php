@@ -11,19 +11,19 @@ define('RUM_CORE_VERSION_7', 7);
 class Rum implements RumInterface {
 
   private $workspace;
-  
+
   private $host_name;
 
   private $project_name;
 
   private $project_dir;
-  
+
   private $project_domain;
 
   private $os;
 
   private $environment;
-  
+
   private $settings_map;
 
   private $date;
@@ -65,15 +65,15 @@ class Rum implements RumInterface {
   public function getWorkspace() {
     return $this->workspace;
   }
-  
+
   public function getProjectDomain() {
     return $this->project_domain;
   }
-  
+
   public function getProjectDir() {
     return $this->project_dir;
   }
-  
+
   public function getProjectName() {
     return $this->project_name;
   }
@@ -118,15 +118,15 @@ class Rum implements RumInterface {
 
     return TRUE;
   }
-  
+
   public function setCoreVersion($version) {
     switch ($version) {
-      case 0 : 
+      case 0 :
         $this->core_version = RUM_CORE_VERSION_6;
         break;
       case 1 :
         $this->core_version = RUM_CORE_VERSION_7;
-        break; 
+        break;
     }
   }
 

@@ -5,9 +5,9 @@ namespace Rum\Component\Rum;
 use Rum\Component\Rum\RumDecorator;
 
 class RumVanilla extends RumDecorator {
-  
+
   private $rum;
-  
+
   public function __construct($rum) {
     parent::__construct($rum);
   }

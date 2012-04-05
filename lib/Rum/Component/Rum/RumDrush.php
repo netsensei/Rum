@@ -21,7 +21,7 @@ class RumDrush extends RumDecorator {
   /**
    * @todo contains a bug: getProjectDir contains absolute path, this poses
    *  a problem when we use commands, like rd, which uses aliases since the
-   *  workspace is prepended againt o the project dir. 
+   *  workspace is prepended againt o the project dir.
    */
   public function createDrush() {
     $environment = $this->getEnvironment();

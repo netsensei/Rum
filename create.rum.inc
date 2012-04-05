@@ -9,14 +9,13 @@ use Rum\Component\Rum\RumDrush;
 use Rum\Component\Rum\RumHosts;
 
 function drush_rum_create($type, $project_name = NULL) {
-  
   // Set the project name
-  if (is_null($project_name)) { 
+  if (is_null($project_name)) {
     $project_name = drush_prompt(dt('Enter the project name'));
   }
 
   $project_dir = drush_prompt(dt('Enter the project directory'));
-  
+
   try {
     // Init
     $rum = new Rum($project_name, $project_dir);

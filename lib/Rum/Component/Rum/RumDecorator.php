@@ -19,7 +19,7 @@ abstract class RumDecorator implements RumInterface {
   public function getProjectDomain() {
     return $this->rum->getProjectDomain();
   }
-  
+
   public function getProjectDir() {
     return $this->rum->getProjectDir();
   }
@@ -43,7 +43,7 @@ abstract class RumDecorator implements RumInterface {
   public function getTime() {
     return $this->rum->getTime();
   }
-  
+
   public function getCoreVersion() {
     return $this->rum->getCoreVersion();
   }

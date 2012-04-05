@@ -6,9 +6,9 @@ use Rum\Component\Rum\RumDecorator;
 use Rum\Component\FileSystem\FileSystem;
 
 class RumFileSystem extends RumDecorator {
-  
+
   private $file_system;
-  
+
   private $project_dir;
 
   public function __construct(Rum $rum) {
@@ -20,7 +20,7 @@ class RumFileSystem extends RumDecorator {
     $workspace = $this->getWorkspace();
     $this->createDirectory($workspace);
   }
-  
+
   public function createProjectDir() {
     $project_dir = $this->getProjectDir();
     $this->createDirectory($project_dir);

@@ -23,7 +23,7 @@ class MySQL extends Database {
    * @param type $db_cred 
    */
   public function createUser($db_user, $db_cred) {
-  
+
     // Create harmless privilige first so the user is created in case it does not exist.
     $harmless = $this->baseCommand() . "GRANT USAGE ON *.* TO '" . $db_user . "'@'localhost';\"";
     drush_shell_exec($harmless);
@@ -35,7 +35,7 @@ class MySQL extends Database {
     $create_command = $this->baseCommand() . "CREATE USER '" . $db_user . "'@'localhost' IDENTIFIED BY '" . $db_cred . "';\"";
     drush_shell_exec($create_command);
   }
-  
+
   public function createDatabase($database, $db_user) {
     // Drop the database entirely before we go on.
     $this->dropDatabase($database);
@@ -55,19 +55,19 @@ class MySQL extends Database {
     $drop_command = $this->baseCommand() . "DROP USER '" . $db_user . "'@'localhost';\"";
     drush_shell_exec($drop_command);
   }
-  
+
   public function dropDatabase($database) {
     $drop_command = $this->baseCommand() . "DROP DATABASE IF EXISTS " . $database . ";\"";
     drush_shell_exec($drop_command);
   }
-  
+
   /**
    * Helper function
-   * 
+   *
    * This is a helper function which returns a base command with a few preconfigured
    * switches. The command is concatenated with a specific query and run through
    * drush_shell_exec().
-   * 
+   *
    * @return
    *   A string with the mysql base command
    */

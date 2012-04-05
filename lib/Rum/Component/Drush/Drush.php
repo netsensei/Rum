@@ -11,7 +11,7 @@ class Drush {
   public function __construct() {
     $this->file_system = new FileSystem;
   }
-  
+
   public function getSettings() {
     return array('rum_drush_dir');
   }

@@ -99,7 +99,7 @@ class RumDatabase extends RumDecorator {
     $contents = $base . $db_link;
     $this->file_system->createFile($settings_custom_file, $contents);
   }
-  
+
   private function getBaseSettingsFileContents() {
     $output = <<<SETTINGS
 <?php

@@ -13,7 +13,7 @@ use Rum\Component\Rum\RumFileSystem;
 use Rum\Component\Rum\RumDrush;
 
 function drush_rum_delete($project = NULL) {
-  
+
   // Get the project dir from the root property in the drushrc configuration
   $project = drush_get_option('rum_project_name', '');
   $project_dir = drush_get_option('rum_project_dir', '');
@@ -60,5 +60,4 @@ function drush_rum_delete($project = NULL) {
   } catch (Exception $e) {
     drush_set_error($e->getMessage());
   }
-  
 }
