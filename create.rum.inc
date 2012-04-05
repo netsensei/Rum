@@ -55,6 +55,26 @@ function drush_rum_create($type, $project_name = NULL) {
     // Create a new drushrc file
     $rum = new RumDrush($rum);
     $rum->createDrush();
+
+    // Finally, install the site
+    // @todo Do we put this in a separate class? Might wanna reuse for a profile install...
+    $install = drush_confirm(dt('Do you want to install the site now?'));
+    if ($install) {
+      // The project name is the alias name of our site
+      $alias = '@' . $rum->getProjectName();
+      $site_record = drush_sitealias_get_record($alias);
+      drush_bootstrap_max_to_sitealias($site_record, DRUSH_BOOTSTRAP_DRUPAL_CONFIGURATION);
+      // Make this configurable? Provide defaults!
+      $options['uid1_account'] = drush_prompt(dt('Enter the administrator (uid=1) account name'));
+      $options['uid1_pass'] = drush_prompt(dt('Enter the administrator (uid=1) password'));
+      $options['uid1_mail'] = drush_prompt(dt('Enter the administrator (uid=1) e-mail address'));
+      $options['locale'] = drush_prompt(dt('Enter your desired locale'));
+      $options['site_name'] = drush_prompt(dt('Enter the name of your site'));
+      $options['site_mail'] = drush_prompt(dt('Enter the global mail address of your site'));
+      drush_include_engine('drupal', 'site_install', drush_drupal_major_version());
+      drush_core_site_install_version(NULL, $options);
+    }
+
   } catch(Exception $e) {
     drush_set_error($e->getMessage());
   }
