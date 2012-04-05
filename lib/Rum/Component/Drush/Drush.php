@@ -30,9 +30,9 @@ class Drush {
   );
 
   \$options = array(
-    'rum_environment = '$environment';
-    'rum_project_dir = '$project_dir';
-    'rum_project_name' = '$project_name';
+    'rum_environment' = '$environment',
+    'rum_project_dir' = '$project_dir',
+    'rum_project_name' = '$project_name',
   );
 DRUSH;
 
