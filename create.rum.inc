@@ -50,7 +50,10 @@ function drush_rum_create($type, $project_name = NULL) {
 
     // Create a new database user
     $rum = new RumDatabase($rum);
+    $rum->setProjectDbUser();
     $rum->createUser();
+    $rum->setProjectDb();
+    $rum->createDatabase();
     $rum->createSettingsFile();
 
     // Create a new drushrc file

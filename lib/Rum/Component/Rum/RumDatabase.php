@@ -124,31 +124,45 @@ SETTINGS;
     return $output;
   }
 
-  public function setProjectDbUser($db_user, $db_cred) {
-    $this->db_user = $db_user;
-    $this->db_cred = $db_cred;
+  public function setProjectDbUser($db_user = NULL, $db_cred = NULL) {
+    if (is_null($db_user)) {
+      $this->db_user = substr($this->getEnvironment() . '_' . strtoupper($this->getProjectName()), 0, 16);
+    } else {
+      $this->db_user = $db_user;
+    }
+
+    if (is_null($db_cred)) {
+      $this->db_cred = md5(strrev($db_user));
+    } else {
+      $this->db_cred = $db_cred;
+    }
   }
 
-  public function setProjectDb($database) {
+  public function setProjectDb($database = NULL) {
+    if (is_null($database)) {
+      $database = substr($this->getEnvironment() . '_' . strtoupper($this->getProjectName()), 0, 16);
+    }
     $this->database = $database;
   }
 
   public function createUser() {
-    $this->db_user = substr($this->getEnvironment() . '_' . strtoupper($this->getProjectName()), 0, 16);
-    $this->db_cred = md5(strrev($db_user));
+    drush_log(dt('Creating a new database user...'), 'status');
     $this->db_server->createUser($this->db_user, $this->db_cred);
   }
 
   public function createDatabase() {
-    $this->db_server->createDatabase($this->database);
+    drush_log(dt('Creating a new database ...'), 'status');
+    $this->db_server->createDatabase($this->database, $this->db_user);
   }
 
   public function dropUser() {
     $this->db_server->dropUser($this->db_user);
+    // @todo make more verbose
   }
 
   public function dropDatabase() {
     $this->db_server->dropDatabase($this->database);
+    // @todo make more verbose
   }
 
 }
