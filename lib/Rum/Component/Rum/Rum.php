@@ -127,10 +127,27 @@ class Rum implements RumInterface {
       case 1 :
         $this->core_version = RUM_CORE_VERSION_7;
         break;
+      default :
+        throw new RumNoValidCoreVersionException;
+    }
+  }
+
+  public function bootstrap($phase) {
+    // The project name is the alias name of our site
+    $project_name = $this->getProjectName();
+    $alias = '@' . $project_name;
+    $site_record = drush_sitealias_get_record($alias);
+    if (!drush_bootstrap_max_to_sitealias($site_record, $phase)) {
+      throw new RumBootstrapDrupalConfigurationFailed();
     }
   }
 
   public function getCoreVersion() {
+
+    if (is_null($this->core_version)) {
+      return drush_drupal_major_version();
+    }
+
     return $this->core_version;
   }
 }

@@ -55,4 +55,8 @@ abstract class RumDecorator implements RumInterface {
   public function checkSetting($setting) {
     return $this->rum->checkSetting($setting);
   }
+
+  public function bootstrap($phase) {
+    return $this->rum->bootstrap($phase);
+  }
 }
