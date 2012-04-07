@@ -35,6 +35,8 @@ function drush_rum_delete($project = NULL) {
     if ($result) {
       $rum->dropUser();
       $rum->dropDatabase();
+    } else {
+      return drush_user_abort();
     }
 
     // Delete the hosts reference
