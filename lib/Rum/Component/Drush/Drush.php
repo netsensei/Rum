@@ -26,10 +26,7 @@ class Drush {
 <?php
   \$aliases['$project_name'] = array (
     'root' => '$project_dir/www',
-    'uri' => '$domain_name'
-  );
-
-  \$options = array(
+    'uri' => '$domain_name',
     'rum_environment' => '$environment',
     'rum_project_dir' => '$project_dir',
     'rum_project_name' => '$project_name',
