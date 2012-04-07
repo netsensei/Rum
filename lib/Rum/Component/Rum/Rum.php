@@ -3,6 +3,7 @@
 namespace Rum\Component\Rum;
 
 use Rum\Component\Rum\Exception\RumSettingDoesNotExist;
+use Rum\Component\Rum\Exception\RumNoValidCoreVersionException;
 
 define('RUM_CORE_VERSION_6', 6);
 
