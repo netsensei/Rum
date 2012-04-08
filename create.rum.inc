@@ -48,6 +48,13 @@ function drush_rum_create($type, $project_name = NULL) {
     // Restart webserver
     $rum->restart();
 
+    // Create a new drushrc file
+    $rum = new RumDrush($rum);
+    $rum->createDrush();
+
+    // Bootstrap Drupal to the ROOT phase
+    $rum->bootstrap(DRUSH_BOOTSTRAP_DRUPAL_ROOT);
+
     // Create a new database user
     $rum = new RumDatabase($rum);
     $rum->setProjectDbUser();
@@ -55,10 +62,6 @@ function drush_rum_create($type, $project_name = NULL) {
     $rum->setProjectDb();
     $rum->createDatabase();
     $rum->createSettingsFile();
-
-    // Create a new drushrc file
-    $rum = new RumDrush($rum);
-    $rum->createDrush();
 
     // Finally, install the site
     $install = drush_confirm(dt('Do you want to install the site now?'));
