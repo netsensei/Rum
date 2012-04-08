@@ -12,6 +12,10 @@ class RumDatabase extends RumDecorator {
 
   private $file_system;
 
+  private $db_user;
+
+  private $db_cred;
+
   const RUM_DB_MYSQL = 'MySQL';
 
   function __construct($rum) {
@@ -152,17 +156,15 @@ SETTINGS;
 
   public function createDatabase() {
     drush_log(dt('Creating a new database ...'), 'status');
-    $this->db_server->createDatabase($this->database, $this->db_user);
+    $this->db_server->createDatabase($this->database, $this->db_user,$this->db_cred);
   }
 
   public function dropUser() {
     $this->db_server->dropUser($this->db_user);
-    // @todo make more verbose
   }
 
   public function dropDatabase() {
     $this->db_server->dropDatabase($this->database);
-    // @todo make more verbose
   }
 
 }

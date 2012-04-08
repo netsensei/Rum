@@ -116,7 +116,7 @@ abstract class Database {
 
   abstract public function dropUser($db_user);
 
-  abstract public function createDatabase($database, $db_user);
+  abstract public function createDatabase($database, $db_user, $db_cred);
 
   abstract public function dropDatabase($database);
 

@@ -36,15 +36,15 @@ class MySQL extends Database {
     drush_shell_exec($create_command);
   }
 
-  public function createDatabase($database, $db_user) {
-    // Drop the database entirely before we go on.
-    $this->dropDatabase($database);
+  public function createDatabase($database, $db_user, $db_cred) {
+    // Drop the database
+    $this->dropDatabase($dbatabase);
 
     $create_command = $this->baseCommand() . "CREATE DATABASE IF NOT EXISTS " . $database . ";\"";
     drush_shell_exec($create_command);
 
     // Grant priviliges.
-    $grant_command = $this->baseCommand() . "GRANT USAGE ON * . * TO '" . $db_user . "'@'localhost' WITH MAX_QUERIES_PER_HOUR 0  MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;\"";
+    $grant_command = $this->baseCommand() . "GRANT USAGE ON * . * TO '" . $db_user . "'@'localhost' IDENTIFIED BY '" . $db_cred . "' WITH MAX_QUERIES_PER_HOUR 0  MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0 ;\"";
     drush_shell_exec($grant_command);
     $grant_command = $this->baseCommand() . "GRANT ALL PRIVILEGES ON " . $database . " . * TO '" . $db_user . "'@'localhost';\"";
     drush_shell_exec($grant_command);
