@@ -19,6 +19,7 @@ class Drush {
   public function createDrush($environment, $project_name, $domain_name, $project_dir) {
     $drush_dir = drush_get_option('rum_drush_dir', '');
     $file = $drush_dir . '/'. $project_name . '.aliases.drushrc.php';
+    $rum_project_dir = basename($project_dir);
     if ($this->file_system->checkFile($file)) {
       drush_log(dt('The drush file %file already exists', array('%file' => $file)));
     } else {
@@ -28,7 +29,7 @@ class Drush {
     'root' => '$project_dir/www',
     'uri' => '$domain_name',
     'rum_environment' => '$environment',
-    'rum_project_dir' => '$project_dir',
+    'rum_project_dir' => '$rum_project_dir',
     'rum_project_name' => '$project_name',
   );
 DRUSH;
