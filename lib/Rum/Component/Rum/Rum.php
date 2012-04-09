@@ -2,6 +2,7 @@
 
 namespace Rum\Component\Rum;
 
+use Rum\Component\FileSystem\FileSystem;
 use Rum\Component\Rum\Exception\RumSettingDoesNotExist;
 use Rum\Component\Rum\Exception\RumNoValidCoreVersionException;
 
@@ -58,6 +59,7 @@ class Rum implements RumInterface {
       // @todo bailout
     }
     // Set the project_dir for the action on this particular project
+    $project_dir = FileSystem::sanitize($project_dir);
     $this->project_dir = $this->workspace . '/' . $project_dir;
     // Generate a domain name. Will be hostname.project_name (i.e. netsensei.foobar)
     $this->project_domain = $this->host_name . '.' . $project_name;

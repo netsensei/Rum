@@ -9,13 +9,13 @@ use Rum\Component\Rum\RumWebServer;
 use Rum\Component\Rum\RumDrush;
 use Rum\Component\Rum\RumHosts;
 
-function drush_rum_create($type, $project_name = NULL) {
-  // Set the project name
-  if (is_null($project_name)) {
-    $project_name = drush_prompt(dt('Enter the project name'));
+function drush_rum_create($type, $project_name) {
+  $project_dir = drush_get_option('project-dir', '');
+  if (empty($project_dir)) {
+    // When there is no project_dir, use project_name as project_dir
+    // will be sanitized.
+    $project_dir = $project_name;
   }
-
-  $project_dir = drush_prompt(dt('Enter the project directory'));
 
   try {
     // Init

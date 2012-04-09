@@ -83,9 +83,22 @@ class FileSystem {
     }
 
     if ($success) {
-      drush_log(dt('Removed %file', array('%file' => $file)), 'success');
+      drush_log(dt('Removed @file', array('@file' => $file)), 'success');
     } else {
       // @throw file could not be removed
     }
+  }
+
+  public static function sanitize($filename) {
+    // Code from file_create_filename().
+    // Strip control characters (ASCII value < 32). Though these are allowed in
+    // some filesystems, not many applications handle them well.
+    $filename = preg_replace('/[\x00-\x1F]/u', '_', $filename);
+    if (substr(PHP_OS, 0, 3) == 'WIN') {
+      // These characters are not allowed in Windows filenames
+      $filename = str_replace(array(':', '*', '?', '"', '<', '>', '|'), '_', $filename);
+    }
+
+    return $filename;
   }
 }

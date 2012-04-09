@@ -12,16 +12,21 @@ function rum_drush_command() {
   rum_class_loader();
 
   $items['rum-create'] = array(
-    'description' => 'Creates a local Drupal site',
-    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
-    'examples' => array(
-      'drush rum-create vanilla' => 'Create an empty website with a clean Drupal core setup',
-    ),
+    'description' => 'Creates a new project in your environment with a new Drupal set up',
     'arguments' => array(
-      'type' => 'The type of installation',
-      'project' => 'The project name',
+      'type' => 'The type of installation. Available types: vanilla',
+      'project_name' => 'The name of your project',
+    ),
+    'options' => array(
+       'project-dir' => 'The name of the directory inside the workspace where your project will be scaffolded.',
     ),
     'aliases' => array('rc'),
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
+    'examples' => array(
+      'drush rum-create vanilla' => 'Create a new project and download a clean Drupal core',
+      'drush rum-create vanilla foobar' => 'Create a new project called foobar and download a clean Drupal core',
+      'drush rum-create vanilla --project-name=foobar --project-dir=foobar' => 'Create a new project in the \'foobar\' directory called \'foobar\' and download a clean Drupal core',
+    ),
   );
 
   $items['rum-delete'] = array(
