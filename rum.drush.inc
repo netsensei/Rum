@@ -11,6 +11,8 @@ function rum_drush_command() {
 
   rum_class_loader();
 
+  $items = array();
+
   $items['rum-create'] = array(
     'description' => 'Creates a new project in your environment with a new Drupal set up',
     'arguments' => array(
@@ -23,26 +25,28 @@ function rum_drush_command() {
     'aliases' => array('rc'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
     'examples' => array(
-      'drush rum-create vanilla' => 'Create a new project and download a clean Drupal core',
       'drush rum-create vanilla foobar' => 'Create a new project called foobar and download a clean Drupal core',
-      'drush rum-create vanilla --project-name=foobar --project-dir=foobar' => 'Create a new project in the \'foobar\' directory called \'foobar\' and download a clean Drupal core',
+      'drush rum-create vanilla foobar --project-dir=foobar' => 'Create a new foobar project in the \'foobar\' directory called \'foobar\' and download a clean Drupal core',
     ),
   );
 
   $items['rum-delete'] = array(
     'description' => 'Delete a local project',
-    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_DATABASE,
-    'examples' => array(
-      'drush rum-delete foobar' => 'Delete a project named foobar',
-    ),
+    // 'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_DATABASE,
     'arguments' => array(
       'project' => 'The project name',
     ),
+    'options' => array(
+      'project-dir' => 'The name of the directory inside the workspace where your project is scaffolded.',
+    ),
     'aliases' => array('rd'),
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
+    'examples' => array(
+      'drush rum-delete foobar' => 'Delete a project named foobar',
+    ),
   );
 
   return $items;
-
 }
 
 /**
