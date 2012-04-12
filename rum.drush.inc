@@ -32,7 +32,6 @@ function rum_drush_command() {
 
   $items['rum-delete'] = array(
     'description' => 'Delete a local project',
-    // 'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_DATABASE,
     'arguments' => array(
       'project' => 'The project name',
     ),
