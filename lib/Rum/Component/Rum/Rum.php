@@ -5,6 +5,11 @@ namespace Rum\Component\Rum;
 use Rum\Component\FileSystem\FileSystem;
 use Rum\Component\Rum\Exception\RumSettingDoesNotExist;
 use Rum\Component\Rum\Exception\RumNoValidCoreVersionException;
+use Rum\Component\Rum\Exception\RumBootstrapDrupalConfigurationFailed;
+use Rum\Component\Rum\Exception\RumNoValidEnvironmentSpaceException;
+use Rum\Component\Rum\Exception\RumNoValidProjectDirException;
+use Rum\Component\Rum\Exception\RumNoValidProjectNameException;
+use Rum\Component\Rum\Exception\RumNoValidProjectDomainException;
 
 define('RUM_CORE_VERSION_6', 6);
 
@@ -51,13 +56,7 @@ class Rum implements RumInterface {
     $this->os = drush_get_option('rum_os', 'osx');
     // Set the environment
     $this->environment = 'DEV'; // @todo configure this
-    if (empty($project_name)) {
-      // @todo bailout
-    }
     $this->project_name = $project_name;
-    if (empty($project_dir)) {
-      // @todo bailout
-    }
     // Set the project_dir for the action on this particular project
     $project_dir = FileSystem::sanitize($project_dir);
     $this->project_dir = $this->workspace . '/' . $project_dir;
@@ -70,14 +69,24 @@ class Rum implements RumInterface {
   }
 
   public function getProjectDomain() {
+    if (empty($this->project_domain)) {
+      throw new RumNoValidProjectDomainException();
+    }
     return $this->project_domain;
   }
 
   public function getProjectDir() {
+    if (empty($this->project_dir)) {
+      throw new RumNoValidProjectDirException();
+    }
     return $this->project_dir;
   }
 
   public function getProjectName() {
+    if (empty($this->project_name)) {
+      throw new RumNoValidProjectNameException();
+    }
+
     return $this->project_name;
   }
 
@@ -94,7 +103,16 @@ class Rum implements RumInterface {
   }
 
   public function setEnviroment($environment) {
+    $spaces = $this->getEnvironmentSpaces();
+    if (!in_array($environment, $spaces)) {
+      throw RumNoValidEnvironmentSpaceException($environment);
+    }
+
     return $this->enviroment = $environment;
+  }
+
+  public function getEnvironmentSpaces() {
+    return array('DEV', 'QA', 'PROD');
   }
 
   public function getTime() {
@@ -146,9 +164,12 @@ class Rum implements RumInterface {
   }
 
   public function getCoreVersion() {
-
     if (is_null($this->core_version)) {
-      return drush_drupal_major_version();
+      if ($version = drush_drupal_major_version()) {
+        return $version;
+      }
+
+      throw new RumNoValidCoreVersionException();
     }
 
     return $this->core_version;
