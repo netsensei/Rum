@@ -16,8 +16,8 @@ class Apache extends WebServer {
   const RUM_APACHE_FEDORA = 'fedora';
 
   public function __construct() {
-    $this->hosts_dir = drush_get_option('rum_apache_hosts_dir', '');
-    $this->log_dir = drush_get_option('rum_apache_log_dir', '');
+    $this->hosts_dir = drush_get_option('rum-apache-hosts-dir', '');
+    $this->log_dir = drush_get_option('rum-apache-log-dir', '');
     $this->file_system = new FileSystem();
   }
 

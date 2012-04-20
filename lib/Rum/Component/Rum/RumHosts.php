@@ -37,7 +37,7 @@ class RumHosts extends RumDecorator {
     // Extra check to make sure the hosts file *does* exist
     if ($result) {
       $this->file_system = new FileSystem();
-      $hosts_file = drush_get_option('rum_hosts_file', '');
+      $hosts_file = drush_get_option('rum-hosts-file', '');
       if ($this->file_system->checkFile($hosts_file)) {
          return TRUE;
       } else {

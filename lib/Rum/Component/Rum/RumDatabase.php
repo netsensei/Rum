@@ -30,16 +30,31 @@ class RumDatabase extends RumDecorator {
         throw new RumDbServerClassNotFound($class_name);
     }
     $settings = $this->db_server->getSettings();
-    $settings += array('rum_db_root_user', 'rum_db_root_pass');
+    $settings += array('rum-db-root-user', 'rum-db-root-pass');
     foreach ($settings as $setting) {
       $this->checkSetting($setting);
     }
-    $db_root_user = drush_get_option('rum_db_root_user', '');
-    $db_root_pass = drush_get_option('rum_db_root_pass', '');
+    $db_root_user = drush_get_option('rum-db-root-user', '');
+    $db_root_pass = drush_get_option('rum-db-root-pass', '');
     $this->db_server->setRootUser($db_root_user, $db_root_pass);
     $this->file_system = new FileSystem();
   }
 
+  /**
+   * Create a new settings file
+   *
+   * Each Drupal setup needs a settings.php file with a valid configuration in
+   * order to create a valid connection with a database system. This function
+   * creates a new settings file in sites/project.hostname as soon as the database
+   * was set up.
+   *
+   * @todo We should probably push this into its' own class since Database
+   *  is only intended for specific database I/O operations.
+   *
+   * @return type
+   * @throws RumProjectDbUserNotSetException
+   * @throws RumProjectDbCredNotSetException
+   */
   public function createSettingsFile() {
     if (!isset($this->db_user)) {
       throw new RumProjectDbUserNotSetException();

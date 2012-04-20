@@ -13,11 +13,11 @@ class Drush {
   }
 
   public function getSettings() {
-    return array('rum_drush_dir');
+    return array('rum-drush-dir');
   }
 
   public function createDrush($environment, $project_name, $domain_name, $project_dir) {
-    $drush_dir = drush_get_option('rum_drush_dir', '');
+    $drush_dir = drush_get_option('rum-drush-dir', '');
     $file = $drush_dir . '/'. $project_name . '.aliases.drushrc.php';
     $rum_project_dir = basename($project_dir);
     if ($this->file_system->checkFile($file)) {
@@ -39,7 +39,7 @@ DRUSH;
   }
 
   public function removeDrush($project_name) {
-    $drush_dir = drush_get_option('rum_drush_dir', '');
+    $drush_dir = drush_get_option('rum-drush-dir', '');
     $file = $drush_dir . '/'. $project_name . '.aliases.drushrc.php';
     if ($this->file_system->checkFile($file)) {
       $this->file_system->removeFile($file);

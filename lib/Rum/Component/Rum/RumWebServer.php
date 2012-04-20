@@ -19,8 +19,8 @@ class RumWebServer extends RumDecorator {
 
   function __construct($rum) {
     parent::__construct($rum);
-    $this->checkSetting('rum_http_type');
-    $class_name = drush_get_option('rum_http_type', '');
+    $this->checkSetting('rum-http-type');
+    $class_name = drush_get_option('rum-http-type', '');
     $this->file_system = new FileSystem();
     switch ($class_name) {
       case self::RUM_HTTP_APACHE :
@@ -30,7 +30,7 @@ class RumWebServer extends RumDecorator {
       default :
         throw new RumWebServerClassNotFound($class_name);
     }
-    $settings = array('rum_http_port', 'rum_http_doc_root');
+    $settings = array('rum-http-port', 'rum-http-doc-root');
     $settings += $this->web_server->getSettings();
     foreach ($settings as $setting) {
       $this->checkSetting($setting);
@@ -38,10 +38,10 @@ class RumWebServer extends RumDecorator {
   }
 
   public function createVhost() {
-    $port = drush_get_option('rum_http_port', '');
+    $port = drush_get_option('rum-http-port', '');
     $project_domain = $this->getProjectDomain();
     $web_dir = $this->getProjectDir() . '/www';
-    $link = drush_get_option('rum_http_doc_root', '') . '/' . $this->getProjectName();
+    $link = drush_get_option('rum-http-doc-root', '') . '/' . $this->getProjectName();
     $time = $this->getTime();
     if (!$this->file_system->checkFile($link)) {
       $this->file_system->createLink($web_dir, $link);
@@ -50,7 +50,7 @@ class RumWebServer extends RumDecorator {
   }
 
   public function removeVhost() {
-    $link = drush_get_option('rum_http_doc_root', '') . '/' . $this->getProjectName();
+    $link = drush_get_option('rum-http-doc-root', '') . '/' . $this->getProjectName();
     if ($this->file_system->checkFile($link)) {
       $this->file_system->removeFile($link);
     }

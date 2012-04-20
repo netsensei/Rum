@@ -41,7 +41,7 @@ class Hosts {
   }
 
   public function removeHostsEntry($project_domain) {
-    $hosts_file = drush_get_option('rum_hosts_file', '');
+    $hosts_file = drush_get_option('rum-hosts-file', '');
     drush_log(dt('Removing host entry from !file', array('!file' => $hosts_file)), 'status');
     $hosts_lines = explode("\n", file_get_contents($hosts_file));
     $host_available = FALSE;
@@ -61,6 +61,6 @@ class Hosts {
   }
 
   public function getSettings() {
-    return array('rum_hosts_file');
+    return array('rum-hosts-file');
   }
 }

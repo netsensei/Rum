@@ -40,22 +40,23 @@ class Rum implements RumInterface {
   public function __construct($project_name, $project_dir) {
     drush_log(dt('Initializing Rum ...'), 'status');
     $this->settings_map = array(
-      'rum_workspace', 'rum_host', 'rum_os', 'rum_environment',
+      'rum-workspace', 'rum-host', 'rum-os', 'rum-environment',
     );
     foreach ($this->settings_map as $setting) {
       $this->checkSetting($setting);
     }
     // Set the current time once.
-    date_default_timezone_set(drush_get_option('rum_timezone', 'Europe/Brussels'));
+    date_default_timezone_set(drush_get_option('rum-timezone', 'Europe/Brussels'));
     $this->date = date("Y-m-d_H-i-s", $_SERVER['REQUEST_TIME']);
     // Set the workspace
-    $this->workspace = drush_get_option('rum_workspace', 'workspace');
+    $this->workspace = drush_get_option('rum-workspace', '');
     // Set the hostname of your machine (i.e. netsensei, stalski, swentel, atlas,...)
-    $this->host_name = drush_get_option('rum_host', 'rum');
+    $this->host_name = drush_get_option('rum-host', '');
     // Set the type of OS you're using. Rum is not OS aware.
-    $this->os = drush_get_option('rum_os', 'osx');
+    $this->os = drush_get_option('rum-os', '');
     // Set the environment
-    $this->environment = 'DEV'; // @todo configure this
+    $this->environment = drush_get_option('rum-environment', '');
+    // Set the project name
     $this->project_name = $project_name;
     // Set the project_dir for the action on this particular project
     $project_dir = FileSystem::sanitize($project_dir);

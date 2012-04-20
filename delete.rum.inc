@@ -39,7 +39,7 @@ function drush_rum_delete($project_name = '') {
     $rum = new Rum($project_name, $project_dir);
 
     // Environment
-    $environment = drush_get_option('rum_environment', '');
+    $environment = drush_get_option('rum-environment', '');
     $rum->setEnviroment($environment);
 
     // Delete the db user & db
