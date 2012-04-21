@@ -89,7 +89,6 @@ class RumDatabase extends RumDecorator {
       }
     }
 
-    //include_once($settings_file);
     $contents = file_get_contents($settings_file);
     $contents .= 'require "settings.custom.php";';
     $this->file_system->createFile($settings_file, $contents);

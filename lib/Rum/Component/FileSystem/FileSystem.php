@@ -24,7 +24,7 @@ class FileSystem {
   public function createDir($directory) {
     $return = drush_op('mkdir', $directory);
     if ($return) {
-      drush_log(dt('Created %directory', array('%directory' => $directory)), 'success');
+      drush_log(dt('Created @directory', array('@directory' => $directory)), 'success');
     } else {
       throw new FileSystemDirectoryCreateException($directory);
     }
@@ -33,9 +33,9 @@ class FileSystem {
   }
 
   public function removeDir($directory) {
-    $return = drush_delete_dir($directory);
+    $return = drush_delete_dir($directory, TRUE); // forced removal
     if ($return) {
-      drush_log(dt('Deleted %directory'), array('%directory' => $directory), 'success');
+      drush_log(dt('Deleted @directory'), array('@directory' => $directory), 'success');
     } else {
       throw new FileSystemDirectoryRemoveException($directory);
     }
@@ -61,7 +61,7 @@ class FileSystem {
 
     if ($tmp_file) {
       if (drush_op('copy', $tmp_file, $file)) {
-        drush_log(dt('Created %file', array('%file' => $file)), 'success');
+        drush_log(dt('Created @file', array('@file' => $file)), 'success');
         return TRUE;
       } else {
         // @throw copy failed

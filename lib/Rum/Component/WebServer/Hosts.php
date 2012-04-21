@@ -19,8 +19,8 @@ class Hosts {
   }
 
   public function addHostsEntry($project_domain) {
-    $hosts_file = drush_get_option('rum_hosts_file', '');
-    drush_log(dt('Adding host entry to %file', array('%file' => $hosts_file)), 'status');
+    $hosts_file = drush_get_option('rum-hosts-file', '');
+    drush_log(dt('Adding host entry to !file', array('!file' => $hosts_file)), 'status');
     $hosts_lines = explode("\n", file_get_contents($hosts_file));
     $host_available = FALSE;
     foreach ($hosts_lines as $line) {
@@ -33,7 +33,6 @@ class Hosts {
       $hosts_lines[] = "127.0.0.1\t" . $project_domain;
       // Use exec because the lines might contain % which we really do not need here.
       exec("sudo sh -c 'echo \"" . implode("\n", $hosts_lines) . "\" > /etc/hosts'");
-      drush_log('Entry "'. $project_domain .'" added to hosts file', 'success');
       drush_log(dt('Entry %project_domain added to hosts file', array('%project_domain' => $project_domain)), 'success');
     } else {
       drush_log(dt('Entry %project_domain already in hosts file', array('%project_domain' => $project_domain)), 'warning');

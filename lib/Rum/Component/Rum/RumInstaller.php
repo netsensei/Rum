@@ -23,7 +23,7 @@ class RumInstaller extends RumDecorator {
     // routine picks it up.
     drush_set_context('specific', $options);
 
-     // Determin the major version and launch version specific installation.
+    // Determin the major version and launch version specific installation.
     drush_include_engine('drupal', 'site_install', drush_drupal_major_version());
     drush_core_site_install_version($profile, $options);
 

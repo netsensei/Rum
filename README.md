@@ -17,6 +17,9 @@ commands as possible. Rum takes away the pain of tediously managing virtual
 hosts, databases and the like. The aim is to keep your development setup as clean 
 as a whistle.
 
+WARNING: INSTALL AT YOUR OWN RISK! THIS IS STILL AN UNFINISHED PROJECT. Rum will
+interact (add/remove) with your installation, so things might break severely.
+
 Features
 --------
 
@@ -33,8 +36,6 @@ Installation
 2. Configure your .drushrc file with the rum specific options. Rum will tell
    you when its' missing a crucial configuration parameter
 
-WARNING: INSTALL AT YOUR OWN RISK! THIS IS STILL AN UNFINISHED PROJECT. Rum will
-interact (add/remove) with your installation, so things might break severely.
 
 Roadmap
 -------

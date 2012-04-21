@@ -3,6 +3,7 @@
 namespace Rum\Component\Rum;
 
 use Rum\Component\Rum\RumDecorator;
+use Rum\Component\Rum\Exception\RumNoValidCoreVersionException;
 
 class RumVanilla extends RumDecorator {
 
@@ -14,10 +15,6 @@ class RumVanilla extends RumDecorator {
 
   public function downloadCore() {
     $core_version = $this->getCoreVersion();
-
-    if (!isset($core_version)) {
-      throw new RumCoreVersionNotDetermined();
-    }
 
     $www_dir = $this->getProjectDir() . '/www';
 
