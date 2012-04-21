@@ -9,7 +9,18 @@ use Rum\Component\Rum\RumWebServer;
 use Rum\Component\Rum\RumDrush;
 use Rum\Component\Rum\RumHosts;
 
-function drush_rum_create($type, $project_name) {
+function drush_rum_create($type = NULL, $project_name = NULL) {
+
+  if (!$type) {
+    drush_set_error(dt('You did not provide an installation type.'));
+    return FALSE;
+  }
+
+  if (!$project_name) {
+    drush_set_error(dt('You did not provide a project name.'));
+    return FALSE;
+  }
+  
   $project_dir = drush_get_option('project-dir', '');
   if (empty($project_dir)) {
     // When there is no project_dir, use project_name as project_dir
