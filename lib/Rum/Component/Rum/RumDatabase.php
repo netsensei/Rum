@@ -20,8 +20,8 @@ class RumDatabase extends RumDecorator {
 
   function __construct($rum) {
     parent::__construct($rum);
-    $this->checkSetting('rum_db_type');
-    $class_name = drush_get_option('rum_db_type', '');
+    $this->checkSetting('rum-db-type');
+    $class_name = drush_get_option('rum-db-type', '');
     switch ($class_name) {
       case self::RUM_DB_MYSQL :
         $this->db_server = Database::getInstance($class_name);
