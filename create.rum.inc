@@ -2,6 +2,7 @@
 
 use Rum\Component\Rum\Rum;
 use Rum\Component\Rum\RumDatabase;
+use Rum\Component\Rum\RumSettingsFile;
 use Rum\Component\Rum\RumFileSystem;
 use Rum\Component\Rum\RumVanilla;
 use Rum\Component\Rum\RumInstaller;
@@ -66,13 +67,20 @@ function drush_rum_create($type = NULL, $project_name = NULL) {
     // Bootstrap Drupal to the ROOT phase
     $rum->bootstrap(DRUSH_BOOTSTRAP_DRUPAL_ROOT);
 
-    // Create a new database user
+    // Create the Database
     $rum = new RumDatabase($rum);
     $rum->setProjectDbUser();
     $rum->createUser();
     $rum->setProjectDb();
     $rum->createDatabase();
-    $rum->createSettingsFile();
+
+    $database = $rum->getProjectDb();
+    $password = $rum->getProjectDbCred();
+    $user = $rum->getProjectDbUser();
+
+    // Create a settings file
+    $rum = new RumSettingsFile($rum);
+    $rum->createSettingsFile($database, $user, $password);
 
     // Finally, install the site
     $install = drush_confirm(dt('Do you want to install the site now?'));
