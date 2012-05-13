@@ -40,7 +40,7 @@ class RumWebServer extends RumDecorator {
   public function createVhost() {
     $port = drush_get_option('rum-http-port', '');
     $project_domain = $this->getProjectDomain();
-    $web_dir = $this->getProjectDir() . '/www';
+    $web_dir = $this->getProjectDir() . '/' . $this->getDocumentRoot();
     $link = drush_get_option('rum-http-doc-root', '') . '/' . $this->getProjectName();
     $time = $this->getTime();
     if (!$this->file_system->checkFile($link)) {

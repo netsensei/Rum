@@ -22,6 +22,8 @@ class Rum implements RumInterface {
   private $project_dir;
 
   private $project_domain;
+  
+  private $project_docroot;
 
   private $os;
 
@@ -35,8 +37,9 @@ class Rum implements RumInterface {
 
   public function __construct($project_name, $project_dir) {
     drush_log(dt('Initializing Rum ...'), 'status');
+    // Set a few defaults in .drushrc.php. We can overrule these through the cli
     $this->settings_map = array(
-      'rum-workspace', 'rum-host', 'rum-os', 'rum-environment',
+      'rum-workspace', 'rum-host', 'rum-os', 'rum-environment', 'rum-docroot',
     );
     foreach ($this->settings_map as $setting) {
       $this->checkSetting($setting);
@@ -59,6 +62,8 @@ class Rum implements RumInterface {
     $this->project_dir = $this->workspace . '/' . $project_dir;
     // Generate a domain name. Will be hostname.project_name (i.e. netsensei.foobar)
     $this->project_domain = $this->host_name . '.' . $project_name;
+    // Set the document root of your project i.e. 'www'
+    $this->project_docroot = drush_get_option('rum-docroot', '');
   }
 
   public function getWorkspace() {
@@ -170,5 +175,13 @@ class Rum implements RumInterface {
     }
 
     return $this->core_version;
+  }
+  
+  public function setDocumentRoot($document_root) {
+    $this->project_docroot = $document_root;
+  }
+
+  public function getDocumentRoot() {
+    return $this->project_docroot;
   }
 }

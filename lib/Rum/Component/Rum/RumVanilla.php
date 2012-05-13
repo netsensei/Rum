@@ -16,7 +16,7 @@ class RumVanilla extends RumDecorator {
   public function downloadCore() {
     $core_version = $this->getCoreVersion();
 
-    $www_dir = $this->getProjectDir() . '/www';
+    $www_dir = $this->getProjectDir() . '/' . $this->getDocumentRoot();
 
     if (!is_file($www_dir . '/misc/drupal.js')) {
       drush_set_option('destination', $this->getProjectDir());

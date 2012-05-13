@@ -22,4 +22,8 @@ interface RumInterface {
   public function getCoreVersion();
 
   public function setCoreVersion($version);
+  
+  public function getDocumentRoot();
+
+  public function setDocumentRoot($document_directory);
 }

@@ -28,7 +28,7 @@ class RumFileSystem extends RumDecorator {
     if ($scaffold) {
       $project_db_dir = $project_dir . '/db';
       $this->createDirectory($project_db_dir);
-      $project_web_dir = $project_dir . '/www';
+      $project_web_dir = $project_dir . '/' . $this->getDocumentRoot();
       $this->createDirectory($project_web_dir);
     }
   }

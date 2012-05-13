@@ -13,8 +13,8 @@ class RumSettingsFile extends RumDecorator {
   }
 
   public function createSettingsFile($database, $db_user, $db_cred) {    
-    $project_site_folder = $this->getProjectDir() . '/www/sites/'. $this->getProjectDomain();
-    $default_site_folder = $this->getProjectDir() . '/www/sites/default';
+    $project_site_folder = $this->getProjectDir() . '/' . $this->getDocumentRoot() . '/sites/'. $this->getProjectDomain();
+    $default_site_folder = $this->getProjectDir() . '/' . $this->getDocumentRoot() . '/sites/default';
     $settings_file = $project_site_folder .'/settings.php';
     $settings_custom_file = $project_site_folder . '/settings.custom.php';
 
@@ -28,7 +28,7 @@ class RumSettingsFile extends RumDecorator {
       if (is_file($settings_orig)) {
         drush_shell_exec("cp $settings_orig $settings_file");
       }
-      elseif (!$this->file_system->checkFile($this->getProjectDir() . "/www/misc/drupal.js")) {
+      elseif (!$this->file_system->checkFile($this->getProjectDir() . '/' . $this->getDocumentRoot() . '/misc/drupal.js')) {
         drush_log("No site available yet.", 'warning');
         return;
       }
