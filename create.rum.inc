@@ -36,8 +36,9 @@ define('RUM_CORE_VERSION_7', 7);
     $rum = new Rum($project_name, $project_dir);
 
     // Environment
-    $environment = drush_choice(array('DEV', 'QA', 'PROD'), dt('Choose your environment.'));
-    $rum->setEnviroment($environment);
+    $options = array('DEV', 'QA', 'PROD');
+    $choice = drush_choice($options, dt('Choose your environment.'));
+    $rum->setEnviroment($options[$choice]);
 
     // Create the folders in the workspace
     $rum = new RumFileSystem($rum);
