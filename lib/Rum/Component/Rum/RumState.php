@@ -25,8 +25,10 @@ class RumState extends RumDecorator {
     }
   }
 
-  public function fetch($repository, $working_directory) {
-    $working_directory = $this->getProjectDir();
+  public function fetch($repository, $working_directory = NULL) {
+    if (!$working_directory) {
+      $working_directory = $this->getProjectDir();
+    }
     $this->state->fetch($repository, $working_directory);
   }
 }
