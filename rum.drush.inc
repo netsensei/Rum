@@ -16,11 +16,16 @@ function rum_drush_command() {
   $items['rum-create'] = array(
     'description' => 'Creates a new project in your environment with a new Drupal set up',
     'arguments' => array(
-      'type' => 'The type of installation. Available types: vanilla',
+      'origin' => 'The origin of installation. Available types: vanilla, repository',
       'project_name' => 'The name of your project',
     ),
     'options' => array(
        'project-dir' => 'The name of the directory inside the workspace where your project will be scaffolded.',
+       'rum-environment' => 'The environment. Usually a prefix used to denote the type of installation. DEV, QA, PROD,...',
+       'rum-workspace' => 'The full path of the directory into which you want to create the project',
+       'rum-host' => 'The host name of the environment. This is used to generate a domain name like rum.foo, rum.bar, rum.foobar,...',
+       'rum-os' => 'The OS of your hosting stack. Could be \'osx\' or \'nix\'',
+       'rum-docroot' => 'The directory which acts as the document root for your web server (i.e. Apache or NGinX)',
     ),
     'aliases' => array('rc'),
     'bootstrap' => DRUSH_BOOTSTRAP_DRUSH,
