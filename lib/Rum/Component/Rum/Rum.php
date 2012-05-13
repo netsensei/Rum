@@ -11,10 +11,6 @@ use Rum\Component\Rum\Exception\RumNoValidProjectDirException;
 use Rum\Component\Rum\Exception\RumNoValidProjectNameException;
 use Rum\Component\Rum\Exception\RumNoValidProjectDomainException;
 
-define('RUM_CORE_VERSION_6', 6);
-
-define('RUM_CORE_VERSION_7', 7);
-
 class Rum implements RumInterface {
 
   private $workspace;
@@ -143,10 +139,10 @@ class Rum implements RumInterface {
 
   public function setCoreVersion($version) {
     switch ($version) {
-      case 0 :
+      case RUM_CORE_VERSION_6 :
         $this->core_version = RUM_CORE_VERSION_6;
         break;
-      case 1 :
+      case RUM_CORE_VERSION_7 :
         $this->core_version = RUM_CORE_VERSION_7;
         break;
       default :

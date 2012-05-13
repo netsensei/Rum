@@ -11,6 +11,8 @@ use Rum\Component\Rum\RumDrush;
 use Rum\Component\Rum\RumHosts;
 
 function drush_rum_create($type = NULL, $project_name = NULL) {
+define('RUM_CORE_VERSION_6', 6);
+define('RUM_CORE_VERSION_7', 7);
 
   if (!$type) {
     drush_set_error(dt('You did not provide an installation type.'));
@@ -44,9 +46,10 @@ function drush_rum_create($type = NULL, $project_name = NULL) {
 
     // Download Drupal core
     $rum = new RumVanilla($rum);
-    $msg = dt('What Core version do you want to download?');
-    $version = drush_choice(array('Version 6', 'Version 7'), $msg);
-    $rum->setCoreVersion($version);
+    $options = array('Drupal 6.x', 'Drupal 7.x');
+    $versions = array(RUM_CORE_VERSION_6, RUM_CORE_VERSION_7);
+    $choice = drush_choice($options, dt('What Core version do you want to download?'));
+    $rum->setCoreVersion($versions[$choice]);
     $rum->downloadCore();
 
     // Add a new entry in the hosts file (if we're run in DEV)
