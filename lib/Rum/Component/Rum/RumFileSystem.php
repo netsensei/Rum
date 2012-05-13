@@ -21,14 +21,16 @@ class RumFileSystem extends RumDecorator {
     $this->createDirectory($workspace);
   }
 
-  public function createProjectDir() {
+  public function createProjectDir($scaffold = TRUE) {
     $project_dir = $this->getProjectDir();
     $this->createDirectory($project_dir);
-    $project_db_dir = $project_dir . '/db';
-    $this->createDirectory($project_db_dir);
-    $project_web_dir = $project_dir . '/www';
-    $this->createDirectory($project_web_dir);
     $this->project_dir = $project_dir;
+    if ($scaffold) {
+      $project_db_dir = $project_dir . '/db';
+      $this->createDirectory($project_db_dir);
+      $project_web_dir = $project_dir . '/www';
+      $this->createDirectory($project_web_dir);
+    }
   }
 
   public function removeProjectDir() {
