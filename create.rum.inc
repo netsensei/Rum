@@ -118,7 +118,7 @@ function rum_create_vanilla($project_name = NULL) {
 }
 
 function rum_create_repository($project_name = NULL) {
-    $project_dir = drush_get_option('project-dir', '');
+  $project_dir = drush_get_option('project-dir', '');
   if (empty($project_dir)) {
     // When there is no project_dir opiton set, use project_name as project_dir
     // will be sanitized.
