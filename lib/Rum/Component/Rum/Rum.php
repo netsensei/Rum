@@ -25,6 +25,8 @@ class Rum implements RumInterface {
   
   private $project_docroot;
 
+  private $project_db_dir;
+
   private $os;
 
   private $environment;
@@ -39,7 +41,7 @@ class Rum implements RumInterface {
     drush_log(dt('Initializing Rum ...'), 'status');
     // Set a few defaults in .drushrc.php. We can overrule these through the cli
     $this->settings_map = array(
-      'rum-workspace', 'rum-host', 'rum-os', 'rum-environment', 'rum-docroot',
+      'rum-workspace', 'rum-host', 'rum-os', 'rum-environment', 'rum-docroot', 'rum-project-db-dir',
     );
     foreach ($this->settings_map as $setting) {
       $this->checkSetting($setting);
@@ -62,8 +64,10 @@ class Rum implements RumInterface {
     $this->project_dir = $this->workspace . '/' . $project_dir;
     // Generate a domain name. Will be hostname.project_name (i.e. netsensei.foobar)
     $this->project_domain = $this->host_name . '.' . $project_name;
-    // Set the document root of your project i.e. 'www'
+    // Set the default document root of your project i.e. 'www'
     $this->project_docroot = drush_get_option('rum-docroot', '');
+    // Set the default db dir where your project db dumps reside i.e. 'db'
+    $this->project_db_dir = drush_get_option('rum-project-db-dir', '');
   }
 
   public function getWorkspace() {
@@ -183,5 +187,13 @@ class Rum implements RumInterface {
 
   public function getDocumentRoot() {
     return $this->project_docroot;
+  }
+
+  public function setDatabaseDir($project_db_dir) {
+    $this->project_db_dir = $project_db_dir;
+  }
+
+  public function getDatabaseDir() {
+    return $this->project_db_dir;
   }
 }
