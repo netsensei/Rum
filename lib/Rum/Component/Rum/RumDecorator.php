@@ -59,12 +59,20 @@ abstract class RumDecorator implements RumInterface {
   public function bootstrap($phase) {
     return $this->rum->bootstrap($phase);
   }
-  
+
   public function getDocumentRoot() {
     return $this->rum->getDocumentRoot();
   }
 
   public function setDocumentRoot($project_docroot) {
-    return $this->rum->setDocumentRoot($project_docroot);
+    $this->rum->setDocumentRoot($project_docroot);
+  }
+
+  public function getDatabaseDir() {
+    return $this->rum->getDatabaseDir();
+  }
+
+  public function setDatabaseDir($project_db_dir) {
+    $this->rum->setDatabaseDir($project_db_dir);
   }
 }
