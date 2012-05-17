@@ -183,6 +183,24 @@ function rum_create_repository($project_name = NULL) {
     // Create a settings file
     $rum = new RumSettingsFile($rum);
     $rum->createSettingsFile($database, $user, $password);
+
+    // Import a database from the db/ folder
+    $import = drush_confirm(dt('Do you want to import a database dump right now?'));
+    if ($import) {
+      $db_dir = $rum->getProjectDir() . '/' . $rum->getDatabaseDir();
+      $contents = drush_scan_directory($db_dir, '/.*/', array('.', '..'), 0, FALSE, 'basename', 0, FALSE);
+      $options = array_keys($contents);
+      $choice = drush_choice($options, dt('Select the database dump you want to import.'));
+      $rum->bootstrap(DRUSH_BOOTSTRAP_DRUPAL_CONFIGURATION);
+      $base_name = $options[$choice];
+      $contents[$base_name]->filename;
+      if (isset($contents[$base_name]->filename)) {
+       $exec = drush_sql_build_exec(NULL, $contents[$base_name]->filename);
+       if (drush_shell_exec($exec)) {
+         drush_log(dt('Database dump succesfully imported'), 'success');
+       }
+      }
+    }
   } catch(Exception $e) {
     drush_set_error($e->getMessage());
   }
