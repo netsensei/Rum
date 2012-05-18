@@ -10,6 +10,7 @@ use Rum\Component\Rum\Exception\RumNoValidEnvironmentSpaceException;
 use Rum\Component\Rum\Exception\RumNoValidProjectDirException;
 use Rum\Component\Rum\Exception\RumNoValidProjectNameException;
 use Rum\Component\Rum\Exception\RumNoValidProjectDomainException;
+use Rum\Component\Rum\Exception\RumNoValidOperatingSystemException;
 
 class Rum implements RumInterface {
 
@@ -101,6 +102,11 @@ class Rum implements RumInterface {
   }
 
   public function getOs() {
+    $oses = $this->getEnvironmentOSes();
+    if (!in_array($this->os, $oses)) {
+      throw new RumNoValidOperatingSystemException($this->os);
+    }
+    
     return $this->os;
   }
 
@@ -111,10 +117,14 @@ class Rum implements RumInterface {
   public function setEnviroment($environment) {
     $spaces = $this->getEnvironmentSpaces();
     if (!in_array($environment, $spaces)) {
-      throw RumNoValidEnvironmentSpaceException($environment);
+      throw new RumNoValidEnvironmentSpaceException($environment);
     }
 
     return $this->enviroment = $environment;
+  }
+
+  public function getEnvironmentOSes() {
+    return array('osx', 'nix');
   }
 
   public function getEnvironmentSpaces() {
