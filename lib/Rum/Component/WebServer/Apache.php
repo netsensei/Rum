@@ -7,8 +7,6 @@ use Rum\Component\FileSystem\FileSystem;
 
 class Apache extends WebServer {
 
-  private $protection = '';
-
   const RUM_APACHE_UBUNTU = 'ubuntu';
 
   const RUM_APACHE_OSX = 'osx';
@@ -76,12 +74,6 @@ CONFIG;
         break;
       default:
         throw new RumApacheNoCommandNotFound();
-    }
-  }
-
-  public function setProtection() {
-    $protect = drush_confirm("Do you want to protect this website via .htaccess ? This will create a htpasswd file in /etc/htpasswd.");
-    if ($protect) {
     }
   }
 }

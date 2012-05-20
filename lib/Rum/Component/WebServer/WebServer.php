@@ -32,7 +32,5 @@ abstract class WebServer {
 
   abstract public function restart($os);
 
-  abstract public function setProtection();
-
   abstract public function getSettings();
 }
