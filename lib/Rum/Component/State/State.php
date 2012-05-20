@@ -18,4 +18,8 @@ abstract class State {
 
   abstract public function fetch($repository, $working_copy);
 
+  abstract public function createIgnoreFile($working_copy);
+
+  abstract public function getIgnoreFile();
+
 }
