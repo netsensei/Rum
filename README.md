@@ -42,8 +42,9 @@ Features
 Installation
 ------------
 
-1. Download and put the rum installation base in a your /Users/<code>username</code>/.drush folder, or clone the repository from Github:
+1. Download and put the rum installation base in a your /home/<code>user</code>/.drush folder or clone the repository from Github:
 
+* On Mac OS X
 		cd .drush
 		git clone git://github.com/netsensei/Rum.git
 		
