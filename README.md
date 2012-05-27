@@ -42,7 +42,11 @@ Features
 Installation
 ------------
 
-1. Put the rum installation base in a your /home/<user>/.drush folder
+1. Download and put the rum installation base in a your /Users/<code>username</code>/.drush folder, or clone the repository from Github:
+
+		cd .drush
+		git clone git://github.com/netsensei/Rum.git
+		
 2. Configure your .drushrc file with the rum specific options contained in the drushrc.php file
    in the installation base. Rum will tell you when it is missing a crucial configuration parameter
 
