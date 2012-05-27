@@ -7,7 +7,7 @@ use Rum\Component\FileSystem\FileSystem;
 
 class RumSettingsFile extends RumDecorator {
 
-  function __construct($rum) {
+  public function __construct($rum) {
     parent::__construct($rum);
     $this->file_system = new FileSystem();
   }

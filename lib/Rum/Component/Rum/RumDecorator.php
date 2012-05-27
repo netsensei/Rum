@@ -8,7 +8,7 @@ abstract class RumDecorator implements RumInterface {
 
   private $rum;
 
-  public function __construct(Rum $rum) {
+  public function __construct(RumInterface $rum) {
     $this->rum = $rum;
   }
 
