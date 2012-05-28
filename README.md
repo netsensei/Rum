@@ -42,15 +42,17 @@ Features
 Installation
 ------------
 
-1. Download and put the rum installation base in a your /home/<code>user</code>/.drush folder or clone the repository from Github:
-
-* On Mac OS X
+1.a Download and put the rum installation base in a your .drush folder, or clone the repository from Github:
 
 		cd .drush
 		git clone git://github.com/netsensei/Rum.git
 		
-2. Configure your .drushrc file with the rum specific options contained in the drushrc.php file
-   in the installation base. Rum will tell you when it is missing a crucial configuration parameter
+* On Mac OS X, you'll find your .drush folder at /Users/<code>username</code>/
+		
+1.b Open up your command line tool en enter <code>drush help</code>.
+If Drush doesn't pick up the Rum commands (which you should see at the bottom of the help message), remove the <code>Cache</code> folder from <code>.drush</code>.
+		
+2. Configure your .drushrc file with the rum specific options contained in the drushrc.php file in the installation base. Rum will tell you when it is missing a crucial configuration parameter.
 
 How to use Rum
 --------------
