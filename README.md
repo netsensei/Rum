@@ -4,9 +4,9 @@ README
 Author
 ------
 
-Matthias "Netsensei" Vandermaesen
-matthias@colada.be
-http://www.colada.be
+Matthias "Netsensei" Vandermaesen<br>
+matthias@colada.be<br>
+http://www.colada.be<br>
 
 About this fork
 ---------------
@@ -17,9 +17,9 @@ I recommend using, forking and filing issues against [the original Rum](https://
 
 This fork is maintained by:
 
-Jurgen "Sjugge" Verhasselt
-sjugge@heretiksambrosia.Netsensei
-http://heretiksambrosia.net
+Jurgen "Sjugge" Verhasselt<br>
+sjugge@heretiksambrosia.net<br>
+http://heretiksambrosia.net<br>
 
 What is Rum?
 ------------
