@@ -17,7 +17,7 @@ class RumDatabase extends RumDecorator {
 
   const RUM_DB_MYSQL = 'MySQL';
 
-  function __construct($rum) {
+  public function __construct($rum) {
     parent::__construct($rum);
     $this->checkSetting('rum-db-type');
     $class_name = drush_get_option('rum-db-type', '');

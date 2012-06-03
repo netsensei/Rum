@@ -15,7 +15,7 @@ class RumState extends RumDecorator {
   
   const RUM_STATE_GIT = 'Git';
 
-  public function __construct(Rum $rum, $type) {
+  public function __construct($rum, $type) {
     parent::__construct($rum);
     switch ($type) {
       case self::RUM_STATE_SVN :

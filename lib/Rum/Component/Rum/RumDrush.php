@@ -9,7 +9,7 @@ class RumDrush extends RumDecorator {
 
   protected $drush;
 
-  public function __construct(Rum $rum) {
+  public function __construct($rum) {
     parent::__construct($rum);
     $this->drush = new Drush();
     $settings = $this->drush->getSettings();

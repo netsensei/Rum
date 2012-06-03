@@ -11,7 +11,7 @@ class RumFileSystem extends RumDecorator {
 
   private $project_dir;
 
-  public function __construct(Rum $rum) {
+  public function __construct($rum) {
     parent::__construct($rum);
     $this->file_system = new FileSystem();
   }
