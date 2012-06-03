@@ -8,6 +8,19 @@ Matthias "Netsensei" Vandermaesen
 matthias@colada.be
 http://www.colada.be
 
+About this fork
+---------------
+
+The main reason I forked [Netsensei's Rum](https://github.com/netsensei/Rum) was to contribute to the documentation and possibly the code when and where my skills would allow me to do so.
+
+I recommend using, forking and filing issues against [the original Rum](https://github.com/netsensei/Rum).
+
+This fork is maintained by:
+
+Jurgen "Sjugge" Verhasselt
+sjugge@heretiksambrosia.Netsensei
+http://heretiksambrosia.net
+
 What is Rum?
 ------------
 
@@ -42,33 +55,37 @@ Features
 Installation
 ------------
 
-1.a Download and put the rum installation base in a your .drush folder, or clone the repository from Github:
+* Download and put the rum installation base in a your .drush folder, or clone the repository from Github:
 
 		cd .drush
 		git clone git://github.com/netsensei/Rum.git
 		
-* On Mac OS X, you'll find your .drush folder at /Users/<code>username</code>/
+On Mac OS X, you'll find your .drush folder at /Users/<code>username</code>/
 		
-1.b Open up your command line tool en enter <code>drush help</code>.
+* Open up your command line tool en enter <code>drush help</code>.
 If Drush doesn't pick up the Rum commands (which you should see at the bottom of the help message), remove the <code>Cache</code> folder from <code>.drush</code>.
 		
-2. Configure your .drushrc file with the rum specific options contained in the drushrc.php file in the installation base. Rum will tell you when it is missing a crucial configuration parameter.
+* Configure your .drushrc file with the rum specific options contained in the drushrc.php file in the installation base. Rum will tell you when it is missing a crucial configuration parameter.	
+
+More information about the drushrc file can be found in the [example.drushrc.php file](http://drush.ws/examples/example.drushrc.php).
+
+* one suggestion is to copy/paste .drush/Rum/drushrc.php to .drush/drushrc.php and to add your specific option to that file. Symbolic linking the file didn't seem to do the trick and it could be a potential security risk when pushing updates to the Rum repo. Pulling in updates may also override users' options.
 
 How to use Rum
 --------------
 
-Install a vanilla Drupal project called foobar
+* Install a vanilla Drupal project called foobar
 
     ~ drush rc vanilla foobar
 
-Install a project Foobar from a CVS repository (local or remote)
+* Install a project Foobar from a CVS repository (local or remote)
 
     ~ drush rc repository foobar
 
 Both commands will create a domain name called hostname.foobar. Navigate to
 http://hostname.foobar to see your project.
 
-Remove a project (vhost, folders, link, database,...):
+* Remove a project (vhost, folders, link, database,...):
 
     ~ drush rd foobar
 
