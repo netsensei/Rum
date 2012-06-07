@@ -3,7 +3,6 @@
 namespace Rum\Component\Rum;
 
 use Rum\Component\Rum\RumDecorator;
-use Rum\Component\Rum\Exception\RumNoValidCoreVersionException;
 
 class RumVanilla extends RumDecorator {
 
@@ -20,9 +19,10 @@ class RumVanilla extends RumDecorator {
 
     if (!is_file($www_dir . '/misc/drupal.js')) {
       drush_set_option('destination', $this->getProjectDir());
-      drush_set_option('drupal-project-rename', basename($www_dir));
-      drush_pm_download('drupal-' . $core_version);
-      if (drush_get_error()) return FALSE; // Early exit if we see an error.;
+      drush_set_option('drupal-project-rename', $this->getDocumentRoot());
+      if (drush_invoke('pm-download', array($core)) === FALSE) {
+        return drush_set_error('', 'Drupal core download/extract failed.');
+      }
     } else {
       drush_log(dt('Drupal already downloaded and unpacked for this project.'));
     }
