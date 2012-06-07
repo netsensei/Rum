@@ -18,6 +18,7 @@ class RumVanilla extends RumDecorator {
     $www_dir = $this->getProjectDir() . '/' . $this->getDocumentRoot();
 
     if (!is_file($www_dir . '/misc/drupal.js')) {
+      drush_set_option('backend', TRUE);
       drush_set_option('destination', $this->getProjectDir());
       drush_set_option('drupal-project-rename', $this->getDocumentRoot());
       if (drush_invoke('pm-download', array($core)) === FALSE) {
