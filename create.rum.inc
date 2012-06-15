@@ -52,11 +52,6 @@ function rum_create_vanilla($project_name = NULL) {
     // Init
     $rum = new Rum($project_name, $project_dir);
 
-    // Environment
-    $options = array('DEV', 'QA', 'PROD');
-    $choice = drush_choice($options, dt('Choose your environment.'));
-    $rum->setEnviroment($options[$choice]);
-
     // Create the folders in the workspace
     $rum = new RumFileSystem($rum);
     $rum->createWorkSpace();
@@ -128,10 +123,6 @@ function rum_create_repository($project_name = NULL) {
   try {
     // Init
     $rum = new Rum($project_name, $project_dir);
-
-    // Environment
-    $environment = drush_choice(array('DEV', 'QA', 'PROD'), dt('Choose your environment.'));
-    $rum->setEnviroment($environment);
 
     // Create the folders in the workspace
     $rum = new RumFileSystem($rum);
