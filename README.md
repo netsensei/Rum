@@ -8,19 +8,6 @@ Matthias "Netsensei" Vandermaesen<br>
 matthias@colada.be<br>
 http://www.colada.be<br>
 
-About this fork
----------------
-
-The main reason I forked [Netsensei's Rum](https://github.com/netsensei/Rum) was to contribute to the documentation and possibly the code when and where my skills would allow me to do so.
-
-I recommend using, forking and filing issues against [the original Rum](https://github.com/netsensei/Rum).
-
-This fork is maintained by:
-
-Jurgen "Sjugge" Verhasselt<br>
-sjugge@heretiksambrosia.net<br>
-http://heretiksambrosia.net<br>
-
 What is Rum?
 ------------
 
@@ -129,3 +116,12 @@ Rum relies on the Drush API. There are few things on the wishlist
 * CVS: Include support for Subversion
 * Web: Include support for NGinX
 * DB: Include support for pgsql
+
+Thanks
+------
+
+These people helped tremendously in making Rum better.
+
+Jurgen "Sjugge" Verhasselt<br>
+sjugge@heretiksambrosia.net<br>
+http://heretiksambrosia.net<br>
