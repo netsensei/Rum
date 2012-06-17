@@ -27,6 +27,7 @@ class RumState extends RumDecorator {
   }
 
   public function fetch($repository, $working_directory = NULL) {
+    drush_log(dt('Fetching project data from remote source...'), 'status');
     if (!$working_directory) {
       $working_directory = $this->getProjectDir();
     }
