@@ -16,7 +16,20 @@ define('RUM_ORIGIN_REPOSITORY', 'repository');
 define('RUM_CORE_VERSION_6', 6);
 define('RUM_CORE_VERSION_7', 7);
 
-function drush_rum_create($origin = NULL, $project_name = NULL) {
+/**
+ * Drush command callback
+ *
+ * This is the drush command callback for drush rum-create. It depending
+ * on the installation type, it will create a project environment and setup a
+ * Drupal installation. There are two types of installation:
+ *
+ *   - Vanilla: Download Drupal core
+ *   - Repository: Get a Drupal project from a repository i.e. Git
+ *
+ * If all went well, you should have an operational Drupal installation after
+ * issuing this command.
+ */
+function drush_rum_create($origin = NULL, $project_name = NULL, $install_profile = NULL) {
 
   if (!$origin) {
     drush_set_error(dt('You did not provide an installation origin.'));
