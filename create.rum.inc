@@ -28,19 +28,6 @@ function drush_rum_create($origin = NULL, $project_name = NULL) {
     return FALSE;
   }
   
-  switch ($origin) {
-    case RUM_ORIGIN_VANILLA :
-      $result = rum_create_vanilla($project_name);
-      break;
-    case RUM_ORIGIN_REPOSITORY :
-      $result = rum_create_repository($project_name);
-      break;
-  }
-
-  return $result;
-}
-
-function rum_create_vanilla($project_name = NULL) {
   $project_dir = drush_get_option('project-dir', '');
   if (empty($project_dir)) {
     // When there is no project_dir, use project_name as project_dir
@@ -48,6 +35,19 @@ function rum_create_vanilla($project_name = NULL) {
     $project_dir = $project_name;
   }
 
+  switch ($origin) {
+    case RUM_ORIGIN_VANILLA :
+      $result = rum_create_vanilla($project_name, $project_dir);
+      break;
+    case RUM_ORIGIN_REPOSITORY :
+      $result = rum_create_repository($project_name, $project_dir);
+      break;
+  }
+
+  return $result;
+}
+
+function rum_create_vanilla($project_name, $project_dir) {
   try {
     // Init
     $rum = new Rum($project_name, $project_dir);
@@ -112,14 +112,7 @@ function rum_create_vanilla($project_name = NULL) {
   return TRUE;
 }
 
-function rum_create_repository($project_name = NULL) {
-  $project_dir = drush_get_option('project-dir', '');
-  if (empty($project_dir)) {
-    // When there is no project_dir opiton set, use project_name as project_dir
-    // will be sanitized.
-    $project_dir = $project_name;
-  }
-
+function rum_create_repository($project_name, $project_dir) {
   try {
     // Init
     $rum = new Rum($project_name, $project_dir);
