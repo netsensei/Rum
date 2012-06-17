@@ -78,16 +78,23 @@ function rum_create_vanilla($project_name, $project_dir) {
     $rum->setCoreVersion($versions[$choice]);
     $rum->downloadCore();
 
-    // Add a new entry in the hosts file (if we're run in DEV)
-    $rum = new RumHosts($rum);
-    $rum->addHostsEntry();
+    // Configuration of your hosts file and webserver is optional. The user might
+    // be running a BIND instance which handles this part of the setup.
+    //
+    // @see http://postpostmodern.com/instructional/a-smarter-mamp/
+    $host_config = drush_confirm(dt('Do you want to add and configure a new host?'), '');
+    if ($host_config) {
+      // Add a new entry in the hosts file (if we're run in DEV)
+      $rum = new RumHosts($rum);
+      $rum->addHostsEntry();
 
-    // Create a new virtual host
-    $rum = new RumWebServer($rum);
-    $rum->createVhost();
+      // Create a new virtual host
+      $rum = new RumWebServer($rum);
+      $rum->createVhost();
 
-    // Restart webserver
-    $rum->restart();
+      // Restart webserver
+      $rum->restart();
+    }
 
     // Create a new drushrc file
     $rum = new RumDrush($rum);
@@ -158,16 +165,23 @@ function rum_create_repository($project_name, $project_dir) {
       $rum->createIgnoreFile($rum->getProjectDir());
     }
 
-    // Add a new entry in the hosts file (if we're run in DEV)
-    $rum = new RumHosts($rum);
-    $rum->addHostsEntry();
+    // Configuration of your hosts file and webserver is optional. The user might
+    // be running a BIND instance which handles this part of the setup.
+    //
+    // @see http://postpostmodern.com/instructional/a-smarter-mamp/
+    $host_config = drush_confirm(dt('Do you want to add and configure a new host?'), '');
+    if ($host_config) {
+      // Add a new entry in the hosts file (if we're run in DEV)
+      $rum = new RumHosts($rum);
+      $rum->addHostsEntry();
 
-    // Create a new virtual host
-    $rum = new RumWebServer($rum);
-    $rum->createVhost();
+      // Create a new virtual host
+      $rum = new RumWebServer($rum);
+      $rum->createVhost();
 
-    // Restart webserver
-    $rum->restart();
+      // Restart webserver
+      $rum->restart();
+    }
 
     // Create a new drushrc file
     $rum = new RumDrush($rum);
