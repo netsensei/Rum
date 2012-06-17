@@ -137,16 +137,17 @@ function rum_create_repository($project_name = NULL) {
     $repository = drush_prompt(dt("Enter the url of the projects' repository"), '');
     $rum->fetch($repository, $rum->getProjectDir());
 
+    // Set the document root of your project
+    $contents = drush_scan_directory($rum->getProjectDir(), '/.*/', array('.', '..'), 0, FALSE, 'basename', 0, FALSE);
+    $options = array_keys($contents);
+    $choice = drush_choice($options, dt('Set the DocumentRoot of your project.'));
+    $rum->setDocumentRoot($options[$choice]);
+
     // Create an ignore file (ignores files from the repo)
     $create_ignore = drush_confirm(dt('Do you want to create an ignore file?'));
     if ($create_ignore) {
       $rum->createIgnoreFile($rum->getProjectDir());
     }
-
-    $contents = drush_scan_directory($rum->getProjectDir(), '/.*/', array('.', '..'), 0, FALSE, 'basename', 0, FALSE);
-    $options = array_keys($contents);
-    $choice = drush_choice($options, dt('Set the DocumentRoot of your project.'));
-    $rum->setDocumentRoot($options[$choice]);
 
     // Add a new entry in the hosts file (if we're run in DEV)
     $rum = new RumHosts($rum);

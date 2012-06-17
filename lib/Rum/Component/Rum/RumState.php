@@ -31,13 +31,21 @@ class RumState extends RumDecorator {
       $working_directory = $this->getProjectDir();
     }
     $this->state->fetch($repository, $working_directory);
+
+    return TRUE;
   }
 
   public function createIgnoreFile($working_directory) {
-    $file_system = new FileSystem();
-    $ignore_file = $working_directory . '/' . $this->state->getIgnoreFile();
-    if (!$file_system->checkFile($ignore_file)) {
-      $this->state->createIgnoreFile($working_directory);
+    if ($this->state instanceof RUM_STATE_SVN) {
+      // @todo implement graceful fail
+    } else {
+      $file_system = new FileSystem();
+      $ignore_file = $working_directory . '/' . $this->getDocumentRoot() . '/' . $this->state->getIgnoreFile();
+      if (!$file_system->checkFile($ignore_file)) {
+        $this->state->createIgnoreFile($working_directory);
+      }
     }
+
+    return TRUE;
   }
 }
