@@ -56,7 +56,6 @@ On Mac OS X, you'll find your .drush folder at /Users/<code>username</code>/
 If Drush doesn't pick up the Rum commands, clear your Drush cache.
 
 		drush cache-clear drush
-
 		
 * Configure your .drushrc file with the rum specific options contained in the drushrc.php file in the installation base. Rum will tell you when it is missing a crucial configuration parameter.	
 
