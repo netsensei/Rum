@@ -49,8 +49,14 @@ Installation
 		
 On Mac OS X, you'll find your .drush folder at /Users/<code>username</code>/
 		
-* Open up your command line tool en enter <code>drush help</code>.
-If Drush doesn't pick up the Rum commands (which you should see at the bottom of the help message), remove the <code>Cache</code> folder from <code>.drush</code>.
+* Open up your command line tool and run 
+ 
+		drush help | grep rum
+
+If Drush doesn't pick up the Rum commands, clear your Drush cache.
+
+		drush cache-clear drush
+
 		
 * Configure your .drushrc file with the rum specific options contained in the drushrc.php file in the installation base. Rum will tell you when it is missing a crucial configuration parameter.	
 
@@ -63,18 +69,18 @@ How to use Rum
 
 * Install a vanilla Drupal project called foobar
 
-    ~ drush rc vanilla foobar
+		drush rc vanilla foobar
 
 * Install a project Foobar from a CVS repository (local or remote)
 
-    ~ drush rc repository foobar
+		drush rc repository foobar
 
 Both commands will create a domain name called hostname.foobar. Navigate to
 http://hostname.foobar to see your project.
 
 * Remove a project (vhost, folders, link, database,...):
 
-    ~ drush rd foobar
+		drush rd foobar
 
 Where does Rum store my data?
 -----------------------------
@@ -101,7 +107,7 @@ connect it to the project.
 It's possible to change the defaults in your .drushrc.php configuration and or pass specific
 changes as options from the command line. Refer to this command for more information:
 
-   ~ drush rc help
+		drush rc help
 
 Roadmap
 -------
