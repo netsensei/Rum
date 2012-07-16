@@ -61,6 +61,11 @@ function drush_rum_create($origin = NULL, $project_name = NULL, $install_profile
 }
 
 function rum_create_vanilla($project_name, $project_dir) {
+
+  if(drush_get_arguments() > 3) {
+      drush_log(dt('You provided too many arguments.'), 'warning');
+  }
+
   try {
     // Init
     $rum = new Rum($project_name, $project_dir);
@@ -136,6 +141,11 @@ function rum_create_vanilla($project_name, $project_dir) {
 }
 
 function rum_create_repository($project_name, $project_dir) {
+
+  if(drush_get_arguments() > 3) {
+      drush_log(dt('You provided too many arguments.'), 'warning');
+  }
+
   try {
     // Init
     $rum = new Rum($project_name, $project_dir);
