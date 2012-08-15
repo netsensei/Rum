@@ -61,7 +61,7 @@ class MySQL extends Database {
 
   public function createDatabase($database, $db_user, $db_cred) {
     // Drop the database
-    $this->dropDatabase($dbatabase);
+    $this->dropDatabase($database);
 
     $create_command = $this->baseCommand() . "CREATE DATABASE IF NOT EXISTS " . $database . ";\"";
     drush_shell_exec($create_command);
