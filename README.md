@@ -36,8 +36,15 @@ Features
 
 * Manage your Drupal instances (Setup a new virtual host, a database and a host name)
 * Set up Drupal vanilla
-* Install a project from a CVS (Git)
+* Install a project from a GIT or Subversion repository
 * Platform independent (MAMP, Ubuntu,...)
+
+Dependencies
+------------
+
+* Drush
+* L/MAMP stack
+* Git and/or Subversion command line tools
 
 Installation
 ------------
@@ -56,7 +63,7 @@ On Mac OS X, you'll find your .drush folder at /Users/<code>username</code>/
 If Drush doesn't pick up the Rum commands, clear your Drush cache.
 
 		drush cache-clear drush
-		
+
 * Configure your .drushrc file with the rum specific options contained in the drushrc.php file in the installation base. Rum will tell you when it is missing a crucial configuration parameter.	
 
 More information about the drushrc file can be found in the [example.drushrc.php file](http://drush.ws/examples/example.drushrc.php).
@@ -66,9 +73,13 @@ More information about the drushrc file can be found in the [example.drushrc.php
 How to use Rum
 --------------
 
+### Vanilla install
+
 * Install a vanilla Drupal project called foobar
 
 		drush rc vanilla foobar
+
+### Repository install
 
 * Install a project Foobar from a CVS repository (local or remote)
 
@@ -76,6 +87,19 @@ How to use Rum
 
 Both commands will create a domain name called hostname.foobar. Navigate to
 http://hostname.foobar to see your project.
+
+Note: when using a Subversion repository you may want to checkout the just the trunk and not the entire repo.
+For instance, if you have a repository at http://my.subversion-server.com/awesome-repo, you should give the following URL:
+
+		http://my.subversion-server.com/awseom-repo/trunk
+
+This way you'll check any folders in the root of your repository instead of the trunk folder which will not comply with the way Rum expects your repo to be setup.
+
+#### Repository install example
+
+A complete walkthrough for a (GIT) repository based installation (and removal) using Rum is available in the [Rum Repo Example](https://github.com/sjugge/Rum-Repo-Example) [README](https://github.com/sjugge/Rum-Repo-Example/blob/master/README.md).
+
+### Removing an installation
 
 * Remove a project (vhost, folders, link, database,...):
 
