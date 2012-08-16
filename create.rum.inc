@@ -127,7 +127,7 @@ function rum_create_vanilla($project_name, $project_dir) {
     }
 
     $url = $rum->getProjectDomain();
-    drush_log(dt('Done! Point your browser to !url to view your project', array('!url' => $url)), 'success');
+    drush_log(dt('Done! Point your browser to http://!url to view your project', array('!url' => $url)), 'success');
   } catch(Exception $e) {
     drush_set_error($e->getMessage());
   }
@@ -224,7 +224,7 @@ function rum_create_repository($project_name, $project_dir) {
     }
 
     $url = $rum->getProjectDomain();
-    drush_log(dt('Done! Point your browser to !url to view your project', array('!url' => $url)), 'success');
+    drush_log(dt('Done! Point your browser to http://!url to view your project', array('!url' => $url)), 'success');
   } catch(Exception $e) {
     drush_set_error($e->getMessage());
   }
