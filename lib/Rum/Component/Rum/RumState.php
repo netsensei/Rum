@@ -3,6 +3,7 @@
 namespace Rum\Component\Rum;
 
 use Rum\Component\Rum\RumDecorator;
+use Rum\Component\Rum\Exception\RumClassTypeNotFound;
 use Rum\Component\State\State;
 use Rum\Component\State\Git;
 use Rum\Component\FileSystem\FileSystem;
@@ -23,6 +24,7 @@ class RumState extends RumDecorator {
         $this->state = State::getInstance($type);
         break;
       default:
+      	throw new RumClassTypeNotFound($type);
     }
   }
 
