@@ -159,12 +159,6 @@ function rum_create_repository($project_name, $project_dir) {
     $choice = drush_choice($options, dt('Set the DocumentRoot of your project.'));
     $rum->setDocumentRoot($options[$choice]);
 
-    // Create an ignore file (ignores files from the repo)
-    $create_ignore = drush_confirm(dt('Do you want to create an ignore file?'));
-    if ($create_ignore) {
-      $rum->createIgnoreFile($rum->getProjectDir());
-    }
-
     // Configuration of your hosts file and webserver is optional. The user might
     // be running a BIND instance which handles this part of the setup.
     //

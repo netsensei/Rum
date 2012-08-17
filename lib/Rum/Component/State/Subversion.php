@@ -15,8 +15,4 @@ class Subversion extends State {
       throw new RumRepositoryNotCheckedOutException($repository, $working_directory);
     }
   }
-
-  public function getIgnoreFile() { }
-
-  public function createIgnoreFile($working_directory) { }
 }
