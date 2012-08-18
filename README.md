@@ -1,15 +1,45 @@
-README
-======
+RUM README
+==========
 
-Author
-------
+[About](#about)
+
+* [Author](#author)
+* [What is Rum?](#what-is-rum)
+* [Why Rum?](#why-rum)
+* [Features](#features)
+* [Dependencies](#dependencies)
+
+[Installation](#installation)
+
+[How to use Rum](#how-to-use-rum)
+
+* [Vanilla install](#vanilla-install)
+* [Repository install](#repository-install)
+* [Repository install example](#repository-install-example)
+* [Removing an installation](#removing-an-installation)
+* [Repository removal example](#repository-removal-example)
+
+[Where does Rum store my data?](#where-does-rum-store-my-data)
+
+[Known issues](#known-issues)
+
+[Resources](#resources)
+
+[Roadmap](#roadmap)
+
+[Thanks](#thanks)
+
+About
+-----
+
+### Author
 
 Matthias "Netsensei" Vandermaesen<br>
 matthias@colada.be<br>
 http://www.colada.be<br>
 
-What is Rum?
-------------
+
+### What is Rum?
 
 Rum is a set of Drush scripts that makes a Drupal developers' life easier.
 It allows you to quickly set up and tear down Drupal websites with as few
@@ -19,8 +49,8 @@ hosts, databases,...
 The aim is to keep your development setup as clean as a whistle and allowing you
 to set up a new Drupal site quickly.
 
-Why Rum?
---------
+
+### Why Rum?
 
 Although a myriad of general solutions already exists, the idea behind Rum is to 
 do one thing only: quickly setting up and tearing down Drupal websites.
@@ -31,13 +61,20 @@ to really dive into OOP and design patterns.
 WARNING: INSTALL AT YOUR OWN RISK! THIS IS STILL AN UNFINISHED PROJECT. Rum will
 interact (add/remove) with your installation, so things might break severely.
 
-Features
---------
+
+### Features
 
 * Manage your Drupal instances (Setup a new virtual host, a database and a host name)
 * Set up Drupal vanilla
-* Install a project from a CVS (Git)
+* Install a project from a GIT or Subversion repository
 * Platform independent (MAMP, Ubuntu,...)
+
+### Dependencies
+
+* Drush
+* L/MAMP stack
+* Git and/or Subversion command line tools
+
 
 Installation
 ------------
@@ -56,7 +93,7 @@ On Mac OS X, you'll find your .drush folder at /Users/<code>username</code>/
 If Drush doesn't pick up the Rum commands, clear your Drush cache.
 
 		drush cache-clear drush
-		
+
 * Configure your .drushrc file with the rum specific options contained in the drushrc.php file in the installation base. Rum will tell you when it is missing a crucial configuration parameter.	
 
 More information about the drushrc file can be found in the [example.drushrc.php file](http://drush.ws/examples/example.drushrc.php).
@@ -66,9 +103,13 @@ More information about the drushrc file can be found in the [example.drushrc.php
 How to use Rum
 --------------
 
+### Vanilla install
+
 * Install a vanilla Drupal project called foobar
 
 		drush rc vanilla foobar
+
+### Repository install
 
 * Install a project Foobar from a CVS repository (local or remote)
 
@@ -77,9 +118,26 @@ How to use Rum
 Both commands will create a domain name called hostname.foobar. Navigate to
 http://hostname.foobar to see your project.
 
+Note: when using a Subversion repository you may want to checkout the just the trunk and not the entire repo.
+For instance, if you have a repository at http://my.subversion-server.com/awesome-repo, you should give the following URL:
+
+		http://my.subversion-server.com/awseom-repo/trunk
+
+This way you'll check any folders in the root of your repository instead of the trunk folder which will not comply with the way Rum expects your repo to be setup.
+
+#### Repository install example
+
+A complete walkthrough for a (GIT) repository based installation using Rum is available in the [Rum Repo Example](https://github.com/sjugge/Rum-Repo-Example) [README](https://github.com/sjugge/Rum-Repo-Example#install-using-rum).
+
+### Removing an installation
+
 * Remove a project (vhost, folders, link, database,...):
 
 		drush rd foobar
+
+#### Repository removal example
+
+A complete walkthrough for removing a Rum based installation using Rum is available in the [Rum Repo Example](https://github.com/sjugge/Rum-Repo-Example) [README](https://github.com/sjugge/Rum-Repo-Example#remove-installation-using-rum).
 
 Where does Rum store my data?
 -----------------------------
@@ -108,6 +166,17 @@ changes as options from the command line. Refer to this command for more informa
 
 		drush rc help
 
+Known issues
+------------
+
+Issues are tracked in the [GitHub issue tracker for Rum](https://github.com/netsensei/Rum/issues).
+
+Resources
+---------
+
+* [You and your development environment](http://labs.krimson.be/articles/you-and-your-development-environment)
+
+
 Roadmap
 -------
 
@@ -118,7 +187,7 @@ Rum relies on the Drush API. There are few things on the wishlist
 * Better use of native Drush API functions. I've written some stuff which was already
   in the API.
 * Create projects from an installation profile
-* CVS: Include support for Subversion
+* ~~CVS: Include support for Subversion~~
 * Web: Include support for NGinX
 * DB: Include support for pgsql
 
