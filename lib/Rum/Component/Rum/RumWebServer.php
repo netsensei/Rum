@@ -3,9 +3,9 @@
 namespace Rum\Component\Rum;
 
 use Rum\Component\Rum\RumDecorator;
+use Rum\Component\Rum\Exception\RumClassTypeNotFound;
 use Rum\Component\WebServer\WebServer;
 use Rum\Component\FileSystem\FileSystem;
-use Rum\Component\WebServer\Exception\RumWebServerClassNotFound;
 
 class RumWebServer extends RumDecorator {
 
@@ -28,7 +28,7 @@ class RumWebServer extends RumDecorator {
         $this->web_server = WebServer::getInstance($class_name);
         break;
       default :
-        throw new RumWebServerClassNotFound($class_name);
+        throw new RumClassTypeNotFound($class_name, 'Webserver');
     }
     $settings = array('rum-http-port', 'rum-http-doc-root');
     $settings += $this->web_server->getSettings();

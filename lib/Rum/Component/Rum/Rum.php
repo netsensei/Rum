@@ -82,6 +82,10 @@ class Rum implements RumInterface {
     return $this->project_domain;
   }
 
+  public function getProjectUrl() {
+  	return "http://" . $this->getProjectDomain();
+  }
+
   public function getProjectDir() {
     if (empty($this->project_dir)) {
       throw new RumNoValidProjectDirException();

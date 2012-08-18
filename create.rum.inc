@@ -126,8 +126,8 @@ function rum_create_vanilla($project_name, $project_dir) {
       $rum->install($profile);
     }
 
-    $url = $rum->getProjectDomain();
-    drush_log(dt('Done! Point your browser to http://!url to view your project', array('!url' => $url)), 'success');
+    $url = $rum->getProjectUrl();
+    drush_log(dt('Done! Point your browser to !url to view your project', array('!url' => $url)), 'success');
   } catch(Exception $e) {
     drush_set_error($e->getMessage());
   }
@@ -158,12 +158,6 @@ function rum_create_repository($project_name, $project_dir) {
     $options = array_keys($contents);
     $choice = drush_choice($options, dt('Set the DocumentRoot of your project.'));
     $rum->setDocumentRoot($options[$choice]);
-
-    // Create an ignore file (ignores files from the repo)
-    $create_ignore = drush_confirm(dt('Do you want to create an ignore file?'));
-    if ($create_ignore) {
-      $rum->createIgnoreFile($rum->getProjectDir());
-    }
 
     // Configuration of your hosts file and webserver is optional. The user might
     // be running a BIND instance which handles this part of the setup.
@@ -223,8 +217,8 @@ function rum_create_repository($project_name, $project_dir) {
       }
     }
 
-    $url = $rum->getProjectDomain();
-    drush_log(dt('Done! Point your browser to http://!url to view your project', array('!url' => $url)), 'success');
+    $url = $rum->getProjectUrl();
+    drush_log(dt('Done! Point your browser to !url to view your project', array('!url' => $url)), 'success');
   } catch(Exception $e) {
     drush_set_error($e->getMessage());
   }

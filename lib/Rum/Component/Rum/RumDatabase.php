@@ -3,6 +3,7 @@
 namespace Rum\Component\Rum;
 
 use Rum\Component\Rum\RumDecorator;
+use Rum\Component\Rum\Exception\RumClassTypeNotFound;
 use Rum\Component\Database\Database;
 
 class RumDatabase extends RumDecorator {
@@ -26,7 +27,7 @@ class RumDatabase extends RumDecorator {
         $this->db_server = Database::getInstance($class_name);
         break;
       default :
-        throw new RumDbServerClassNotFound($class_name);
+        throw new RumClassTypeNotFound($class_name, 'Database');
     }
     $settings = $this->db_server->getSettings();
     $settings += array('rum-db-root-user', 'rum-db-root-pass');

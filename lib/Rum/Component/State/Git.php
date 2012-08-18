@@ -14,6 +14,11 @@ class Git extends State {
     if (!drush_shell_exec("git clone $repository $working_directory")) {
       throw new RumRepositoryNotClonedException($repository, $working_directory);
     }
+
+    $create_ignore = drush_confirm(dt('Do you want to create an ignore file?'));
+    if ($create_ignore) {
+      $this->createIgnoreFile($working_directory);
+    }
   }
 
   public function getIgnoreFile() {
