@@ -33,6 +33,15 @@ class RumFileSystem extends RumDecorator {
     }
   }
 
+  public function isActiveProjectDir() {
+  	$contents = drush_scan_directory($this->getProjectDir(), '/.*/', array('.', '..'), 0, FALSE, 'basename', 0, FALSE);
+    if (!empty($contents)) {
+      return TRUE;
+    }
+    
+    return FALSE;
+  }
+
   public function removeProjectDir() {
     $project_dir = $this->getProjectDir();
     $this->removeDirectory($project_dir);
