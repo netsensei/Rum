@@ -175,7 +175,7 @@ function rum_create_repository($project_name, $project_dir) {
     // be running a BIND instance which handles this part of the setup.
     //
     // @see http://postpostmodern.com/instructional/a-smarter-mamp/
-    $host_config = drush_confirm(dt('Do you want to add and configure a new host?'), '');
+    $host_config = drush_confirm(dt('Do you want to add and configure a new host?'));
     if ($host_config) {
       _rum_create_host($rum);
     }
