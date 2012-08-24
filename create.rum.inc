@@ -13,6 +13,7 @@ use Rum\Component\Rum\RumState;
 
 define('RUM_ORIGIN_VANILLA', 'vanilla');
 define('RUM_ORIGIN_REPOSITORY', 'repository');
+define('RUM_ORIGIN_SKELETON', 'skeleton');
 define('RUM_CORE_VERSION_6', 6);
 define('RUM_CORE_VERSION_7', 7);
 
@@ -49,6 +50,9 @@ function drush_rum_create($origin = NULL, $project_name = NULL, $install_profile
   }
 
   switch ($origin) {
+    case RUM_ORIGIN_SKELETON :
+      $result = rum_create_skeleton($project_name, $project_dir);
+      break;
     case RUM_ORIGIN_VANILLA :
       $result = rum_create_vanilla($project_name, $project_dir);
       break;
@@ -58,6 +62,39 @@ function drush_rum_create($origin = NULL, $project_name = NULL, $install_profile
   }
 
   return $result;
+}
+
+function rum_create_skeleton($project_name, $project_dir) {
+  try {
+    // Init
+    $rum = new Rum($project_name, $project_dir);
+
+    // Create the folders in the workspace
+    _rum_create_workspace_project($rum);
+
+    // Create a new host
+    $host_config = drush_confirm(dt('Do you want to add and configure a new host?'));
+    if ($host_config) {    
+      _rum_create_host($rum);
+    }
+
+    // Create the Database
+    $db_config = drush_confirm(dt('Do you want to add and configure a new database?'));
+    if ($db_config) {
+      $args = _rum_create_database($rum);
+      foreach ($args as $key => $arg) {
+        $args['!' . $key] = $arg;
+      }
+      drush_log(dt('Rum created a database called !database. You can access it with user:!user pass:!password', $args), 'success');
+    }
+
+    $url = $rum->getProjectUrl();
+    drush_log(dt('Done! Point your browser to !url to view your project', array('!url' => $url)), 'success');
+  } catch(Exception $e) {
+    drush_set_error($e->getMessage());
+  }
+
+  return TRUE;
 }
 
 function rum_create_vanilla($project_name, $project_dir) {

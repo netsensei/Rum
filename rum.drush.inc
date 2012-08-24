@@ -16,7 +16,7 @@ function rum_drush_command() {
   $items['rum-create'] = array(
     'description' => 'Creates a new project in your environment with a new Drupal set up',
     'arguments' => array(
-      'origin' => 'The origin of installation. Available types: vanilla, repository',
+      'origin' => 'The origin of installation. Available types: vanilla, repository, skeleton',
       'project_name' => 'The name of your project',
     ),
     'options' => array(
