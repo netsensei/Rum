@@ -103,9 +103,7 @@ function rum_create_vanilla($project_name, $project_dir) {
     $rum = new Rum($project_name, $project_dir);
 
     // Create the folders in the workspace
-    $rum = new RumFileSystem($rum);
-    $rum->createWorkSpace();
-    $rum->createProjectDir();
+    _rum_create_workspace_project($rum);
 
     // Download Drupal core
     $rum = new RumVanilla($rum);
@@ -115,23 +113,8 @@ function rum_create_vanilla($project_name, $project_dir) {
     $rum->setCoreVersion($versions[$choice]);
     $rum->downloadCore();
 
-    // Configuration of your hosts file and webserver is optional. The user might
-    // be running a BIND instance which handles this part of the setup.
-    //
-    // @see http://postpostmodern.com/instructional/a-smarter-mamp/
-    $host_config = drush_confirm(dt('Do you want to add and configure a new host?'), '');
-    if ($host_config) {
-      // Add a new entry in the hosts file (if we're run in DEV)
-      $rum = new RumHosts($rum);
-      $rum->addHostsEntry();
-
-      // Create a new virtual host
-      $rum = new RumWebServer($rum);
-      $rum->createVhost();
-
-      // Restart webserver
-      $rum->restart();
-    }
+    // Create a new host
+    _rum_create_host($rum);
 
     // Create a new drushrc file
     $rum = new RumDrush($rum);
@@ -141,27 +124,19 @@ function rum_create_vanilla($project_name, $project_dir) {
     $rum->bootstrap(DRUSH_BOOTSTRAP_DRUPAL_ROOT);
 
     // Create the Database
-    $rum = new RumDatabase($rum);
-    $rum->setProjectDbUser();
-    $rum->createUser();
-    $rum->setProjectDb();
-    $rum->createDatabase();
-
-    $database = $rum->getProjectDb();
-    $password = $rum->getProjectDbCred();
-    $user = $rum->getProjectDbUser();
+    $args = _rum_create_database($rum);
 
     // Create a settings file
     $rum = new RumSettingsFile($rum);
-    $rum->createSettingsFile($database, $user, $password);
+    $rum->createSettingsFile($args['database'], $args['user'], $args['password']);
 
     // Finally, install the site
-    $install = drush_confirm(dt('Do you want to install the site now?'));
+    /* $install = drush_confirm(dt('Do you want to install the site now?'));
     if ($install) {
       $profile = NULL;
       $rum = new RumInstaller($rum);
       $rum->install($profile);
-    }
+    } */
 
     $url = $rum->getProjectUrl();
     drush_log(dt('Done! Point your browser to !url to view your project', array('!url' => $url)), 'success');
@@ -202,16 +177,7 @@ function rum_create_repository($project_name, $project_dir) {
     // @see http://postpostmodern.com/instructional/a-smarter-mamp/
     $host_config = drush_confirm(dt('Do you want to add and configure a new host?'), '');
     if ($host_config) {
-      // Add a new entry in the hosts file (if we're run in DEV)
-      $rum = new RumHosts($rum);
-      $rum->addHostsEntry();
-
-      // Create a new virtual host
-      $rum = new RumWebServer($rum);
-      $rum->createVhost();
-
-      // Restart webserver
-      $rum->restart();
+      _rum_create_host($rum);
     }
 
     // Create a new drushrc file
@@ -222,19 +188,11 @@ function rum_create_repository($project_name, $project_dir) {
     $rum->bootstrap(DRUSH_BOOTSTRAP_DRUPAL_ROOT);
 
     // Create the Database
-    $rum = new RumDatabase($rum);
-    $rum->setProjectDbUser();
-    $rum->createUser();
-    $rum->setProjectDb();
-    $rum->createDatabase();
-
-    $database = $rum->getProjectDb();
-    $password = $rum->getProjectDbCred();
-    $user = $rum->getProjectDbUser();
+    $args = _rum_create_database($rum);
 
     // Create a settings file
     $rum = new RumSettingsFile($rum);
-    $rum->createSettingsFile($database, $user, $password);
+    $rum->createSettingsFile($args['database'], $args['user'], $args['password']);
 
     // Import a database from the db/ folder
     $import = drush_confirm(dt('Do you want to import a database dump right now?'));
@@ -261,4 +219,53 @@ function rum_create_repository($project_name, $project_dir) {
   }
 
   return TRUE;
+}
+
+/**
+ * @todo
+ * 
+ * @param unknown_type $rum
+ */
+function _rum_create_workspace_project(&$rum) {
+  $rum = new RumFileSystem($rum);
+  $rum->createWorkSpace();
+  $rum->createProjectDir();
+}
+
+/**
+ * @todo
+ * 
+ * @param unknown_type $rum
+ */
+function _rum_create_host(&$rum) {
+  // Add a new entry in the hosts file (if we're run in DEV)
+  $rum = new RumHosts($rum);
+  $rum->addHostsEntry();
+
+  // Create a new virtual host
+  $rum = new RumWebServer($rum);
+  $rum->createVhost();
+
+  // Restart webserver
+  $rum->restart();
+}
+
+/**
+ * @todo
+ * 
+ * @param unknown_type $rum
+ * @return unknown|boolean
+ */
+function _rum_create_database(&$rum) {
+  $rum = new RumDatabase($rum);
+  $rum->setProjectDbUser();
+  $rum->createUser();
+  $rum->setProjectDb();
+  $rum->createDatabase();
+
+  return array(
+    'database' => $rum->getProjectDb(),
+    'password' => $rum->getProjectDbCred(),
+    'user' => $rum->getProjectDbUser(),
+  );
 }
