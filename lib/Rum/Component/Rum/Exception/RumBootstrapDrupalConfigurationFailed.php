@@ -2,7 +2,7 @@
 
 namespace Rum\Component\Rum\Exception;
 
-class RumProjectDirExistsException extends \Exception {
+class RumBootstrapDrupalConfigurationFailed extends \Exception {
 
   function __construct() {
     $message = dt('Failed to set the drupal environment. Make sure there is a viable installation base.');
