@@ -130,16 +130,8 @@ function rum_create_vanilla($project_name, $project_dir) {
     $rum = new RumSettingsFile($rum);
     $rum->createSettingsFile($args['database'], $args['user'], $args['password']);
 
-    // Finally, install the site
-    /* $install = drush_confirm(dt('Do you want to install the site now?'));
-    if ($install) {
-      $profile = NULL;
-      $rum = new RumInstaller($rum);
-      $rum->install($profile);
-    } */
-
-    $url = $rum->getProjectUrl();
-    drush_log(dt('Done! Point your browser to !url to view your project', array('!url' => $url)), 'success');
+    $url = $rum->getProjectUrl() . '/install.php';
+    drush_log(dt('Done! Point your browser to !url to start installing your project', array('!url' => $url)), 'success');
   } catch(Exception $e) {
     drush_set_error($e->getMessage());
   }
