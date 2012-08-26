@@ -25,6 +25,10 @@ function drush_rum_delete($project_name = '') {
     drush_set_error(dt('No project specified. Pass a project name as an argument.'));
   }
 
+  if(count(drush_get_arguments()) > 2) {
+      drush_log(dt('You provided too many arguments.'), 'warning');
+  }
+
   $alias_project_dir = drush_get_option('rum_project_dir', '');
   if (!empty($alias_project_dir)) {
     $project_dir = $alias_project_dir;
