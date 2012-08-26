@@ -98,6 +98,11 @@ function rum_create_skeleton($project_name, $project_dir) {
 }
 
 function rum_create_vanilla($project_name, $project_dir) {
+
+  if(count(drush_get_arguments()) > 3) {
+      drush_log(dt('You provided too many arguments.'), 'warning');
+  }
+
   try {
     // Init
     $rum = new Rum($project_name, $project_dir);
@@ -140,6 +145,11 @@ function rum_create_vanilla($project_name, $project_dir) {
 }
 
 function rum_create_repository($project_name, $project_dir) {
+
+  if(count(drush_get_arguments()) > 3) {
+      drush_log(dt('You provided too many arguments.'), 'warning');
+  }
+
   try {
     // Init
     $rum = new Rum($project_name, $project_dir);
