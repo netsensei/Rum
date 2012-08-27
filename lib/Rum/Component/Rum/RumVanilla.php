@@ -13,11 +13,11 @@ class RumVanilla extends RumDecorator {
   }
 
   public function downloadCore() {
-    $core_version = $this->getCoreVersion();
-
     $www_dir = $this->getProjectDir() . '/' . $this->getDocumentRoot();
 
     if (!is_file($www_dir . '/misc/drupal.js')) {
+      $core_version = $this->getCoreVersion();
+      $core = "drupal-" . $core_version . ".x";
       drush_log(dt('Downloading Drupal core...'), 'status');
       drush_set_option('backend', TRUE);
       drush_set_option('destination', $this->getProjectDir());
