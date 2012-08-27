@@ -196,6 +196,12 @@ Thanks
 
 These people helped tremendously in making Rum better.
 
+Jim Faes<br>
+jimfaes@gmail.com
+
 Jurgen "Sjugge" Verhasselt<br>
 sjugge@heretiksambrosia.net<br>
-http://heretiksambrosia.net<br>
+http://heretiksambrosia.net
+
+Toon Ketels<br>
+http://www.braahm.be/
