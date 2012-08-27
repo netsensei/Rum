@@ -33,7 +33,8 @@ class RumSettingsFile extends RumDecorator {
     $project_dmain = $this->getProjectDomain();
 
     // Do we want a multisite setup or not?
-    $multi = drush_confirm(dt('Do you want to create a multisite setup or store your settings in the default folder?'));
+    $multi = drush_confirm(dt('Do you want to configure Drupal as a multi site setup (settings.php in a separate sites folder)?'));
+
     if ($multi) {
       // Create an empty project folder. conf_path(FALSE) will pick it up and take care of the rest
       if (!$this->file_system->checkDir($project_site_folder)) {
