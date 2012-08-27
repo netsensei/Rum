@@ -4,6 +4,7 @@ namespace Rum\Component\FileSystem;
 
 use Rum\Component\FileSystem\Exception\FileSystemDirectoryCreateException;
 use Rum\Component\FileSystem\Exception\FileSystemDirectoryWritableException;
+use Rum\Component\FileSystem\Exception\FileSystemCouldNotMoveFile;
 
 class FileSystem {
 
@@ -87,6 +88,16 @@ class FileSystem {
     } else {
       // @throw file could not be removed
     }
+  }
+
+  public function moveFile($source, $target) {
+    if (!drush_op('rename', $source, $target)) {
+      throw new FileSystemCouldNotMoveFile($source, $target);
+    }
+
+    drush_log(dt('Moved the settings.php file to !target.', array('!target' => $target)), 'success');
+
+    return TRUE;
   }
 
   public static function sanitize($filename) {
