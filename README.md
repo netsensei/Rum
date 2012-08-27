@@ -196,12 +196,12 @@ Thanks
 
 These people helped tremendously in making Rum better.
 
-Jim Faes<br>
+[Jim Faes](https://github.com/30equals)<br>
 jimfaes@gmail.com
 
-Jurgen "Sjugge" Verhasselt<br>
+[Jurgen "Sjugge" Verhasselt](https://github.com/sjugge)<br>
 sjugge@heretiksambrosia.net<br>
 http://heretiksambrosia.net
 
-Toon Ketels<br>
+[Toon Ketels](https://github.com/toonketels)<br>
 http://www.braahm.be/
