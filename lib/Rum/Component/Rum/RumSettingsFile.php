@@ -32,6 +32,10 @@ class RumSettingsFile extends RumDecorator {
     $project_site_folder = $this->getProjectDir() . '/' . $this->getDocumentRoot() . '/sites/'. $this->getProjectDomain();
     $project_dmain = $this->getProjectDomain();
 
+    // Create the settings.php file
+    $this->settings_generator->generate_file($database, $db_user, $db_cred, $project_domain);
+    drush_log(dt('Created the settings.php file.'), 'success');
+
     // Do we want a multisite setup or not?
     $multi = drush_confirm(dt('Do you want to configure Drupal as a multi site setup (settings.php in a separate sites folder)?'));
 
@@ -39,12 +43,11 @@ class RumSettingsFile extends RumDecorator {
       // Create an empty project folder. conf_path(FALSE) will pick it up and take care of the rest
       if (!$this->file_system->checkDir($project_site_folder)) {
         $this->file_system->createDir($project_site_folder);
+        $source = $this->getProjectDir() . '/' . $this->getDocumentRoot() . '/sites/default/settings.php';
+        $target = $this->getProjectDir() . '/' . $this->getDocumentRoot() . '/sites/'. $this->getProjectDomain() . '/settings.php';
+        $this->file_system->moveFile($source, $target);
       }
     }
-
-    // Create the settings.php file
-    $this->settings_generator->generate_file($database, $db_user, $db_cred, $project_domain);
-    drush_log(dt('Created the settings.php file.'), 'success');
   }
 
   private function getBaseSettingsFileContents() {
