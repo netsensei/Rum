@@ -13,6 +13,10 @@ use Rum\Component\Rum\RumFileSystem;
 use Rum\Component\Rum\RumDrush;
 
 function drush_rum_delete($project_name = '') {
+  if (count(drush_get_arguments()) > 2) {
+    drush_log(dt('You provided too many arguments.'), 'error');
+    return FALSE;
+  }
 
   // Precedence to the @alias settings. If the project was not generated with Rum,
   // we should still be able to delete it. So we use the options and arguments.
@@ -23,10 +27,6 @@ function drush_rum_delete($project_name = '') {
 
   if (empty($project_name)) {
     drush_set_error(dt('No project specified. Pass a project name as an argument.'));
-  }
-
-  if(count(drush_get_arguments()) > 2) {
-      drush_log(dt('You provided too many arguments.'), 'warning');
   }
 
   $alias_project_dir = drush_get_option('rum_project_dir', '');

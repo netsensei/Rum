@@ -30,7 +30,12 @@ define('RUM_CORE_VERSION_7', 7);
  * If all went well, you should have an operational Drupal installation after
  * issuing this command.
  */
-function drush_rum_create($origin = NULL, $project_name = NULL, $install_profile = NULL) {
+function drush_rum_create($origin = NULL, $project_name = NULL) {
+
+  if (count(drush_get_arguments()) > 3) {
+    drush_log(dt('You provided too many arguments.'), 'error');
+    return FALSE;
+  }
 
   if (!$origin) {
     drush_set_error(dt('You did not provide an installation origin.'));
@@ -98,11 +103,6 @@ function rum_create_skeleton($project_name, $project_dir) {
 }
 
 function rum_create_vanilla($project_name, $project_dir) {
-
-  if(count(drush_get_arguments()) > 3) {
-      drush_log(dt('You provided too many arguments.'), 'warning');
-  }
-
   try {
     // Init
     $rum = new Rum($project_name, $project_dir);
@@ -145,11 +145,6 @@ function rum_create_vanilla($project_name, $project_dir) {
 }
 
 function rum_create_repository($project_name, $project_dir) {
-
-  if(count(drush_get_arguments()) > 3) {
-      drush_log(dt('You provided too many arguments.'), 'warning');
-  }
-
   try {
     // Init
     $rum = new Rum($project_name, $project_dir);
