@@ -28,6 +28,9 @@ class Hosts {
         $host_available = TRUE;
       }
     }
+    
+    // Remove stray empty lines
+    $hosts_lines = array_filter($hosts_lines);
 
     if (!$host_available) {
       $hosts_lines[] = "127.0.0.1\t" . $project_domain;
@@ -50,6 +53,9 @@ class Hosts {
         $host_available = TRUE;
       }
     }
+
+    // Remove stray empty lines
+    $hosts_lines = array_filter($hosts_lines);
 
     if ($host_available) {
       exec("sudo sh -c 'echo \"" . implode("\n", $hosts_lines) . "\" > /etc/hosts'");
