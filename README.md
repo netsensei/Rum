@@ -79,11 +79,11 @@ interact (add/remove) with your installation, so things might break severely.
 Installation
 ------------
 
-* Download and put the rum installation base in a your .drush folder, or clone the repository from Github:
+* Clone the stable release of Rum in your .drush folder:
 
 		cd .drush
-		git clone git://github.com/netsensei/Rum.git
-		
+		git clone -b 1.x git://github.com/netsensei/Rum.git
+
 On Mac OS X, you'll find your .drush folder at /Users/<code>username</code>/
 		
 * Open up your command line tool and run 
@@ -115,8 +115,7 @@ How to use Rum
 
 		drush rc repository foobar
 
-Both commands will create a domain name called hostname.foobar. Navigate to
-http://hostname.foobar to see your project.
+Both commands will create a domain name called hostname.foobar. Rum will talk you through the installation and provide a URL once the process is completed. With a vanilla flavored Rum install, you may need to manually finish the installation in the browser.
 
 Note: when using a Subversion repository you may want to checkout the just the trunk and not the entire repo.
 For instance, if you have a repository at http://my.subversion-server.com/awesome-repo, you should give the following URL:
@@ -127,7 +126,7 @@ This way you'll check any folders in the root of your repository instead of the 
 
 #### Repository install example
 
-A complete walkthrough for a (GIT) repository based installation using Rum is available in the [Rum Repo Example](https://github.com/sjugge/Rum-Repo-Example) [README](https://github.com/sjugge/Rum-Repo-Example#install-using-rum).
+A complete walkthrough for a (GIT) repository based Drupal 7 installation using Rum is available in the [Rum Repo Example](https://github.com/sjugge/Rum-Repo-Example) [README](https://github.com/sjugge/Rum-Repo-Example#install-using-rum).
 
 ### Removing an installation
 
