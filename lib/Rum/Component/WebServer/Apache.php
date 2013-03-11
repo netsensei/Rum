@@ -9,6 +9,8 @@ class Apache extends WebServer {
 
   const RUM_APACHE_UBUNTU = 'ubuntu';
 
+  const RUM_APACHE_MAMP = 'mamp';
+
   const RUM_APACHE_OSX = 'osx';
 
   const RUM_APACHE_FEDORA = 'fedora';
@@ -67,6 +69,9 @@ CONFIG;
         drush_shell_exec("sudo /etc/init.d/apache2 reload");
         break;
       case Apache::RUM_APACHE_OSX :
+        drush_shell_exec("sudo apachectl restart");
+        break;
+      case Apache::RUM_APACHE_MAMP :
 	      drush_shell_exec("/Applications/MAMP/bin/apache2/bin/apachectl restart");
         break;
       case Apache::RUM_APACHE_FEDORA :
