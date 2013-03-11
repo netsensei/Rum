@@ -165,8 +165,21 @@ function rum_create_repository($project_name, $project_dir) {
     // Set the document root of your project
     $contents = drush_scan_directory($rum->getProjectDir(), '/.*/', array('.', '..'), 0, FALSE, 'basename', 0, FALSE);
     $options = array_keys($contents);
+
+    // Only show directories
+    foreach ($options as $key => $option) {
+      $path = $rum->getProjectDir() . '/' . $options[$key];
+      if (!is_dir($path)) {
+        unset($options[$key]);
+      }
+    }
+
+    // Add the projectDir as a valid option (no www/db structure)
+    array_unshift($options, dt('. (Project directory is DocumentRoot)'));
     $choice = drush_choice($options, dt('Set the DocumentRoot of your project.'));
-    $rum->setDocumentRoot($options[$choice]);
+    $document_root = ($choice == 0) ? '' : $options[$choice];
+
+    $rum->setDocumentRoot($document_root);
 
     // Configuration of your hosts file and webserver is optional. The user might
     // be running a BIND instance which handles this part of the setup.
