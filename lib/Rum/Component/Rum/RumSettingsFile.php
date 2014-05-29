@@ -29,8 +29,15 @@ class RumSettingsFile extends RumDecorator {
   }
 
   public function createSettingsFile($database, $db_user, $db_cred) {
-    $project_site_folder = $this->getProjectDir() . '/' . $this->getDocumentRoot() . '/sites/'. $this->getProjectDomain();
+    $web_dir = $this->getDocumentRoot();
     $project_domain = $this->getProjectDomain();
+    if (empty($web_dir)) {
+      $document_root = $this->getProjectDir();
+    }
+    else {
+      $document_root = $this->getProjectDir() . '/' . $web_dir;
+    }
+    $project_site_folder = $document_root . '/sites/'. $project_domain;
 
     // Create the settings.php file
     $this->settings_generator->generate_file($database, $db_user, $db_cred, $project_domain);
