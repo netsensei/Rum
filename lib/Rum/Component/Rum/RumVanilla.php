@@ -25,6 +25,7 @@ class RumVanilla extends RumDecorator {
       if (drush_invoke('pm-download', array($core)) === FALSE) {
         return drush_set_error('', 'Drupal core download/extract failed.');
       }
+      drush_set_option('backend', FALSE);
     } else {
       drush_log(dt('Drupal already downloaded and unpacked for this project.'));
     }

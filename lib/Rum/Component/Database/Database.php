@@ -58,7 +58,7 @@ abstract class Database {
    *   An object of type $class_name. PHP will throw an error if $class_name is
    *   not a valid class.
    */
-  final public function getInstance($class_name) {
+  final static public function getInstance($class_name) {
     $class_name = 'Rum\\Component\\Database\\' . $class_name;
 
     if (!self::$instance) {

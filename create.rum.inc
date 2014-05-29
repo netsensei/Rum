@@ -46,7 +46,7 @@ function drush_rum_create($origin = NULL, $project_name = NULL) {
     drush_set_error(dt('You did not provide a project name.'));
     return FALSE;
   }
-  
+
   $project_dir = drush_get_option('project-dir', '');
   if (empty($project_dir)) {
     // When there is no project_dir, use project_name as project_dir
@@ -79,7 +79,7 @@ function rum_create_skeleton($project_name, $project_dir) {
 
     // Create a new host
     $host_config = drush_confirm(dt('Do you want to add and configure a new host?'));
-    if ($host_config) {    
+    if ($host_config) {
       _rum_create_host($rum);
     }
 
@@ -220,7 +220,7 @@ function rum_create_repository($project_name, $project_dir) {
 
 /**
  * @todo
- * 
+ *
  * @param unknown_type $rum
  */
 function _rum_create_workspace_project(&$rum) {
@@ -231,7 +231,7 @@ function _rum_create_workspace_project(&$rum) {
 
 /**
  * @todo
- * 
+ *
  * @param unknown_type $rum
  */
 function _rum_create_host(&$rum) {
@@ -249,7 +249,7 @@ function _rum_create_host(&$rum) {
 
 /**
  * @todo
- * 
+ *
  * @param unknown_type $rum
  * @return unknown|boolean
  */

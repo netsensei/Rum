@@ -1,5 +1,10 @@
 <?php
 
+// Does not support PHP < v5.3
+if (PHP_MINOR_VERSION < 3) {
+  return;
+}
+
 require_once __DIR__ . '/lib/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 
 use Symfony\Component\ClassLoader\UniversalClassLoader;

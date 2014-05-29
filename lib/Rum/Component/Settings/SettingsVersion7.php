@@ -16,7 +16,7 @@ class SettingsVersion7 extends Settings {
           'default' => array(
             'prefix' => '', // @todo make htis configurable!
             'host' => 'localhost', // @todo make this configurable!
-            'driver' => 'mysql', // @todo this should depend on the relevant driver  
+            'driver' => 'mysql', // @todo this should depend on the relevant driver
             'database' => $database,
             'username' => $db_user,
             'password' => $db_pass,
@@ -35,7 +35,7 @@ class SettingsVersion7 extends Settings {
       // Rewrite the settings file in its' correct place
       drupal_rewrite_settings($settings);
     } catch (Exception $e) {
-      throw new RumCouldNotCreateSettingsFileException($e->getMessage()); 
+      throw new RumCouldNotCreateSettingsFileException($e->getMessage());
     }
 
     return TRUE;

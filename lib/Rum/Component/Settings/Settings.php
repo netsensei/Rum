@@ -9,13 +9,13 @@ abstract class Settings {
 
   protected static $instance = NULL;
 
-  final public function getInstance($class_name) {
+  final static public function getInstance($class_name) {
     $class_name = 'Rum\\Component\\Settings\\' . $class_name;
 
     if (!self::$instance) {
       self::$instance = new $class_name();
     }
-  
+
     return self::$instance;
   }
 

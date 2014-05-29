@@ -19,7 +19,7 @@ abstract class RumDecorator implements RumInterface {
   public function getProjectDomain() {
     return $this->rum->getProjectDomain();
   }
-  
+
   public function getProjectUrl() {
   	return $this->rum->getProjectUrl();
   }

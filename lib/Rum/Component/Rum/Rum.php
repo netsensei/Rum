@@ -23,7 +23,7 @@ class Rum implements RumInterface {
   private $project_dir;
 
   private $project_domain;
-  
+
   private $project_docroot;
 
   private $project_db_dir;
@@ -110,7 +110,7 @@ class Rum implements RumInterface {
     if (!in_array($this->os, $oses)) {
       throw new RumNoValidOperatingSystemException($this->os);
     }
-    
+
     return $this->os;
   }
 
@@ -194,7 +194,7 @@ class Rum implements RumInterface {
 
     return $this->core_version;
   }
-  
+
   public function setDocumentRoot($document_root) {
     $this->project_docroot = $document_root;
   }
